@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Table from './Table';
-import LoginButton from './LoginButton';
-import './App.css';
+import TaTable from './TaTable';
+import LoginButton from '../landing/LoginButton';
+import './TaApp.css';
 
-class App extends Component {
+class TaApp extends Component {
   render() {
     return (
       <div className= "Wrapper">
@@ -13,11 +13,11 @@ class App extends Component {
             {this.props.title}
           </div>
           <div className="TopRight">
-            <LoginButton text="LOGIN"></LoginButton>
+            <LoginButton text="LOGOUT"></LoginButton>
           </div>
         </div>
         <div className="BottomContainer">
-          <Table></Table>
+          <TaTable></TaTable>
         </div>
         
       </div>
@@ -25,4 +25,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default TaApp;
