@@ -5,10 +5,20 @@ class TableRow extends Component
 {
   render()
   {
+    
+    if (this.props.available === "Available")
+    {
+      var cellStyle = "AvailableStyle"
+    }
+    else
+    {
+      var cellStyle = "UnavailableStyle"
+    }
     return (
       <tr className="TableRow">
         <td>{this.props.name}</td>
-        <td>{this.props.available}</td>
+        <td className= {cellStyle}>{this.props.available}</td>
+        
       </tr>
     )
   }

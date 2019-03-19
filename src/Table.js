@@ -14,6 +14,14 @@ class Table extends Component
         </tr>
         <TableRow name="Machine A" available="Available"></TableRow>
         <TableRow name="Machine B" available="In use"></TableRow>
+        <TableRow name="Machine C" available="Available"></TableRow>
+        <TableRow name="Machine D" available="In use"></TableRow>
+        <TableRow name="Machine E" available="Available"></TableRow>
+        <TableRow name="Machine F" available="In use"></TableRow>
+        <TableRow name="Machine G" available="Available"></TableRow>
+        <TableRow name="Machine H" available="In use"></TableRow>
+        <TableRow name="Machine I" available="Available"></TableRow>
+        <TableRow name="Machine J" available="In use"></TableRow>
       </table>
     )
   }

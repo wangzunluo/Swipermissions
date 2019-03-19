@@ -5,11 +5,14 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <div>
+      <div className= "Wrapper">
         <div className="TopContainer">
           <div className="Title">Machine Availability</div>
         </div>
-        <Table></Table>
+        <div className="BottomContainer">
+          <Table></Table>
+        </div>
+        
       </div>
     );
   }
