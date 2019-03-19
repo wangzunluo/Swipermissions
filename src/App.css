@@ -25,10 +25,23 @@
 .TopContainer {
   text-align: center;
   position: relative;
-  min-height: 100%;
   top: 0px;
+  
   background-color: #841617;
   color: #fff;
+}
+
+.BottomContainer 
+{
+  background-color: wheat;
+  bottom: 0;
+  
+}
+
+.Wrapper
+{
+  height: 100%
+  
 }
 
 .Title {
@@ -44,6 +57,17 @@
 
 .TableInner {
   width: 100%
+}
+
+html, body
+{
+  height: 100%;
+  background-color: wheat
+}
+
+#root
+{
+  height: 100%;
 }
 
 @keyframes App-logo-spin {
