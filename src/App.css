@@ -22,6 +22,30 @@
   color: #61dafb;
 }
 
+.TopContainer {
+  text-align: center;
+  position: relative;
+  min-height: 100%;
+  top: 0px;
+  background-color: #841617;
+  color: #fff;
+}
+
+.Title {
+  display: block;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.MainContainer {
+  position: fixed;
+  width: 100%;
+}
+
+.TableInner {
+  width: 100%
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
