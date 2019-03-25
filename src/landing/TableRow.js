@@ -3,21 +3,45 @@ import './TableRow.css'
 
 class TableRow extends Component
 {
-  render()
-  {
-    
+
+  constructor(props) {
+    super(props);
     if (this.props.available === "Available")
     {
-      var cellStyle = "AvailableStyle"
+      var styleType = "AvailableStyle";
     }
     else
     {
-      var cellStyle = "UnavailableStyle"
+      var styleType = "UnavailableStyle";
     }
+    this.state = 
+    {
+      cellStyle: styleType
+    };
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(event)
+  {
+    if (this.props.available === "Available")
+    {
+      this.setState({cellStyle: "UnavailableStyle"});
+    }
+    else
+    {
+      this.setState({cellStyle: "AvailableStyle"});
+    }
+  }
+
+  render()
+  {
+    
+
     return (
-      <tr className="TableRow">
+      <tr className="TableRow" onClick={this.handleClick}>
         <td>{this.props.name}</td>
-        <td className= {cellStyle}>{this.props.available}</td>
+        <td className= {this.state.cellStyle} >{this.props.available}</td>
         
       </tr>
     )
