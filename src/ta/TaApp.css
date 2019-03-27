@@ -1,0 +1,67 @@
+.App {
+  text-align: center;
+}
+
+.TopContainer {
+  text-align: center;
+  position: relative;
+  top: 0px;
+  background-color: #841617;
+  color: #fff;
+}
+
+.BottomContainer 
+{
+  background-color: wheat;
+  bottom: 0;
+  
+}
+
+.Wrapper
+{
+  height: 100%
+  
+}
+
+.Title {
+  display: inline-block;
+  text-align: center;
+  width: 60%;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.TopRight
+{
+  float: right;
+  width:20%;
+
+}
+
+.TopLeft
+{
+  float: left;
+
+  text-align: center;
+  width:20%;
+}
+
+.MainContainer {
+  position: fixed;
+  width: 100%;
+}
+
+.TableInner {
+  width: 100%
+}
+
+html, body
+{
+  height: 100%;
+  background-color: wheat
+}
+
+#root
+{
+  height: 100%;
+}

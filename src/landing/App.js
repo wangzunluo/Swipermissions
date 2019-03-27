@@ -99,10 +99,10 @@ class App extends Component {
         <div className="TopContainer">
           <div className="TopLeft">&nbsp;</div>
           <div className="Title">
-            Machine Availability
-            
+            {this.props.title}
           </div>
           <div className="TopRight">
+<<<<<<< HEAD
             {/*<LoginButton></LoginButton>*/}
             <button variant ='outline-danger' className ='logButton' onClick={this.togglePopup.bind(this)}>LOGIN</button>
             {this.state.showPopup ? 
@@ -112,6 +112,9 @@ class App extends Component {
               />
               : null
         }
+=======
+            <LoginButton text="LOGIN"></LoginButton>
+>>>>>>> 90156727ce4dc6c404213c5d791c3d744e15b2b0
           </div>
         </div>
         <div className="BottomContainer">
