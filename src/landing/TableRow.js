@@ -6,13 +6,14 @@ class TableRow extends Component
 
   constructor(props) {
     super(props);
+    var styleType
     if (this.props.available === "Available")
     {
-      var styleType = "AvailableStyle";
+      styleType = "AvailableStyle";
     }
     else
     {
-      var styleType = "UnavailableStyle";
+      styleType = "UnavailableStyle";
     }
     this.state = 
     {
