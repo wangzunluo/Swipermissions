@@ -7,7 +7,7 @@ class LoginButton extends Component
   {
     return (
       <button>
-        LOGIN
+        {this.props.text}
       </button>
     )
   }
