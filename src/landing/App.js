@@ -28,13 +28,13 @@ class Login extends React.Component {
   }
 
   handleSubmit(event) {
-    if (this.state.user != '' && this.state.password != '')
+    if (this.state.user !== '' && this.state.password !== '')
     {
       alert('A name was submitted: ' + this.state.user + '\n'
         +'A pass was submitted: '  + this.state.password);
 
     }
-    else if (this.state.user != '')
+    else if (this.state.user !== '')
     {
       alert("Please enter a password");
       event.preventDefault();
@@ -102,7 +102,6 @@ class App extends Component {
             {this.props.title}
           </div>
           <div className="TopRight">
-<<<<<<< HEAD
             {/*<LoginButton></LoginButton>*/}
             <button variant ='outline-danger' className ='logButton' onClick={this.togglePopup.bind(this)}>LOGIN</button>
             {this.state.showPopup ? 
@@ -111,10 +110,7 @@ class App extends Component {
                 closePopup={this.togglePopup.bind(this)}
               />
               : null
-        }
-=======
-            <LoginButton text="LOGIN"></LoginButton>
->>>>>>> 90156727ce4dc6c404213c5d791c3d744e15b2b0
+            }
           </div>
         </div>
         <div className="BottomContainer">
