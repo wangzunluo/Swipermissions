@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "progress": "^2.0.3",
     "react": "^16.7.0",
     "react-data-grid": "^6.0.2-0",
     "react-dom": "^16.7.0",
