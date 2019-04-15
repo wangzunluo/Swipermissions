@@ -1,12 +1,24 @@
 .StudentTable{
-    float: left;
-    width: 50%;
+    grid-column: 1;
+    grid-row: 1 / 2;
+    width: 100%;
 }
 
 .MachineTable{
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.LogTable{
+    grid-column: 2;
+    grid-row: 2;
 
 }
 
 .Top{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+    grid-auto-rows: minmax(200px, auto);
     margin-top: 30px;
 }

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './Machine.css';
+import Button from '@material-ui/core/Button';
+
 
 class Machine extends Component {
     render()
@@ -7,8 +9,8 @@ class Machine extends Component {
         return (
         <tr className="Machine">
           <td className= "MName">{this.props.name}</td>
-          <td><button className= "Key">&nbsp;</button></td>
-          <td><button className= "Add">+</button></td>
+          <td className = "KeyBox"><button className= "Key">&nbsp;</button></td>
+          <td><Button variant= 'raised' className= "Add">+</Button></td>
           
         </tr>
       )

@@ -8,7 +8,7 @@ class MachineTable extends Component {
         return (
         <table className="MachineTable">
 
-        <tbody>
+        <tbody className = "chart">
           <tr>
             <th className = "MName">Name</th>
             <th className = "Keys">Key History</th>
