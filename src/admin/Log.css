@@ -1,3 +1,14 @@
 .Log{
     background-color: white;
+    border: 0;
+}
+
+.LName
+{
+    border: 2px solid black;
+}
+
+.AName
+{
+    border: 2px solid black;
 }

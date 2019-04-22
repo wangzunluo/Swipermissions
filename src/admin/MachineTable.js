@@ -9,12 +9,12 @@ class MachineTable extends Component {
         <table className="MachineTable">
 
         <tbody className = "chart">
-          <tr>
+          <tr className = "Titles">
             <th className = "MName">Name</th>
-            <th className = "Keys">Key History</th>
+            <th className = "Keys">Checkout/in</th>
             <th className = "AS">Add Students</th>
           </tr>
-          <Machine name="Bro"></Machine>
+          <Machine name="3D Printer"></Machine>
           <Machine name="Machine A"></Machine>
           <Machine name="Machine C"></Machine>
           <Machine name="Machine D"></Machine>

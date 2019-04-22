@@ -13,7 +13,7 @@ class LogTable extends Component {
             <th className = "LogH">Logs</th>
             <th className = "Author">Author</th>
           </tr>
-          <Log name="Bro" author= "Arwin"></Log>
+          <Log name="April_12_2019.txt" author= "Arwin"></Log>
           <Log name="Log A" author= "Arwin"></Log>
           <Log name="Log C" author= "Arwin"></Log>
           <Log name="Log D" author= "Arwin"></Log>

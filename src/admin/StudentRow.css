@@ -1,7 +1,13 @@
 .TableRow{
     font-size: 8px;
+    border: 2px solid black;
 }
 
 .SName {
     width: 50%;
+    border: 0;
+}
+
+.ID{
+    border: 2px solid black;
 }

@@ -1,13 +1,22 @@
 .MainTable{
     width: 80%;
+    font-size: 8px;
+    border: 0;
+}
+
+.Header
+{
+    font-weight: bold;
+    color: white;
+    background-color: darkred;
+    border: 0;
+
 }
 
 .HName{
-    font-size: 15px;
-    font-weight: normal;
+    border: 2px solid black;
 }
 
 .HID{
-    font-size: 15px;
-    font-weight: normal;
+    border: 2px solid black;
 }
