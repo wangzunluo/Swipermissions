@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
-
+import InfoIcon from '@material-ui/icons/Info'
 
 
 class Machine extends Component {
@@ -30,11 +30,20 @@ class Machine extends Component {
         <td className = "KeyBox">
         <ChangingButton></ChangingButton>
         </td>
-        <div className = 'Third'>        
-          <Fab size="small" color = "primary" className ='Add'>
-          <AddIcon className = 'Icon' />
+        <td className = "InfoBox">
+        <div className = 'Fourth'>        
+          <Fab size="small" color = "primary" className ='Info'>
+          <InfoIcon className = 'Icon2' />
           </Fab>
         </div>
+        </td>
+        <td className = "AddBox">
+        <div className = 'Third'>        
+          <Fab size="small" color = "primary" className ='Add'>
+          <AddIcon/>
+          </Fab>
+        </div>
+        </td>
         
       </tr>
     )

@@ -12,7 +12,7 @@ class AdminApp extends Component
 {
     render() {
         return (
-            <div>
+            <div className = "Wrapper">
                 <div className = "Banner">
                 Admin View
                 </div>
@@ -23,11 +23,7 @@ class AdminApp extends Component
 
                     <div className = "MachineTable">
                     <MachineTable></MachineTable>
-                    
                     </div>
-                    <div className = "LogTable">
-                    <LogTable></LogTable>               
-                    </div> 
 
                 </div>
             </div>

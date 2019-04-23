@@ -2,26 +2,68 @@
 {
     table-layout:fixed
 }
+
+.hide{
+    visibility: hidden;
+}
 th.sortable{
     cursor:pointer
 }
+
+.myTable{
+    max-height: 0px !important;
+}
+
+.options
+{
+    display: inline-block;
+
+}
+
+.table-bordered thead th{
+    color: white;
+    background-color: darkred;
+}
+.table-bordered thead tr{
+}
+
+.table-bordered tbody{
+    overflow-y: auto;
+    max-height: 500px !important;
+    height: 500px;
+    background-color: white;
+
+}
+
+
 .table-bordered{
     border-collapse: collapse;
     font-size: 8px;
     overflow-y: auto !important;
-    height: 25% !important;
+    height: 500px;
+    max-height: 500px;
     margin-top: 15px;
-    position: relative;
+}
+
+.problem{
+    height: 700px !important;
+    max-height: 500px;
+}
+
+.table-bordered>.thead{
+    color: white !important;
+
 }
 
 .search-label{
-    
+    position: fixed;
+
     margin-bottom: 30px;
 }
 
 .react-bootstrap-table{
     overflow-y: auto !important;
-
+    max-height: 90% !important;
 }
 .order>.dropdown>.caret{margin:10px 0 10px 5px;color:#ccc}
 .react-bootstrap-table th .order>.dropup>.caret{margin:10px 0;color:#ccc}

@@ -12,14 +12,18 @@ class MachineTable extends Component {
           <tr className = "Titles">
             <th className = "MName">Name</th>
             <th className = "Keys">Checkout/in</th>
-            <th className = "AS">Add Students</th>
+            <th className = "KeyHistory">History</th>
+
+            <th className = "AS">Add Users</th>
           </tr>
-          <Machine name="3D Printer"></Machine>
-          <Machine name="Machine A"></Machine>
-          <Machine name="Machine C"></Machine>
-          <Machine name="Machine D"></Machine>
-          <Machine name="Machine E"></Machine>
-          <Machine name="Machine F"></Machine>
+          <Machine name="Mill"></Machine>
+          <Machine name="Mill"></Machine>
+          <Machine name="Lathe"></Machine>
+          <Machine name="Lathe"></Machine>
+          <Machine name="CNC Mill"></Machine>
+          <Machine name="CNC Router"></Machine>
+          <Machine name="CNC Plasma"></Machine>
+
         </tbody>
       </table>
         )
