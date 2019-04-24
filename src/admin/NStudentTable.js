@@ -52,70 +52,76 @@ const columns = [{
     lookup: {1: 'yes', 2: 'no'}
 }];
 class NStudentTable extends Component{
+    constructor(){
+        super();
+
+        this.state = 
+        {
+            data:JSON.parse(localStorage.getItem('data')) ||
+            [
+                { name: 'Matthew Ramsey', email: "Matthew.M.Ramsey-1@ou.edu", m1: 'Y', m2: 2, m3: 1, m4: 2, m5: 2 },
+                { name: 'Arwin', email: "arwin@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
+                { name: 'Jake', email: "baerj@ou.edu", m1: 2, m2: 2, m3: 1, m4: 2, m5: 2 },
+                { name: 'Matthew Ramsey', email: "Matthew.M.Ramsey-1@ou.edu", m1: 'Y', m2: 2, m3: 1, m4: 2, m5: 2 },
+                { name: 'Arwin', email: "arwin@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
+
+            ]
+        };
+
+        this.addRow = this.addRow.bind(this);
+    }
+
+    addRow()
+    {
+        
+        var newArray = this.state.data.slice();   
+        /*
+        render(); {
+            return (
+              <div className='Login'>
+                <div className='Login_inner'>
+                  <div className='Close_bar'>
+                    <button className ='closer' onClick={this.props.closePopup}>X</button>
+                  </div>
+                  <Greeting isLoggedIn={this.state.password !== ''} />
+        
+                  <div className ='SignIn'>
+                  Sign In
+                    <form className='SignForm' onSubmit={this.handleSubmit}>
+                    User ID: 
+                      <label className='UserBar'>
+                        
+                        <input type="text" value={this.state.user} onChange={this.handleChangeUser} />
+                      </label>
+                    Password: 
+                      <label className='PasswordBar'>
+                        
+                        <input type="text" value={this.state.password} onChange={this.handleChangePassword} />
+                      </label>
+                      <input type="submit" value="Submit" />
+                    </form>
+                  </div>
+        
+                </div>
+         
+              </div>
+            );
+          }
+          */
+
+        newArray.push({ name: 'Jake', email: "baerj@ou.edu", m1: 2, m2: 2, m3: 1, m4: 2, m5: 2 });   
+        this.setState({data:newArray});
+        localStorage.setItem('data', JSON.stringify(newArray));
+
+    }
+
     render() {
         return(
             <ToolkitProvider className= "myTable"
                 bootstrap4 = {true}
                 keyField="id"
-                data={
-                    [
-                        { name: 'Matthew Ramsey', email: "Matthew.M.Ramsey-1@ou.edu", m1: 'Y', m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Arwin', email: "arwin@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Jake', email: "baerj@ou.edu", m1: 2, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Batthew', email: "Matthew.M.Ramsey-1@ou.edu", m1: 2, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Urwin', email: "arwin@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Rake', email: "baerj@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Matthew', email: "Matthew.M.Ramsey-1@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Arwin', email: "arwin@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Jake', email: "baerj@ou.edu", m1: 2, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Batthew', email: "Matthew.M.Ramsey-1@ou.edu", m1: 2, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Urwin', email: "arwin@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Rake', email: "baerj@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Arwin', email: "arwin@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Jake', email: "baerj@ou.edu", m1: 2, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Batthew', email: "Matthew.M.Ramsey-1@ou.edu", m1: 2, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Urwin', email: "arwin@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Rake', email: "baerj@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Arwin', email: "arwin@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Jake', email: "baerj@ou.edu", m1: 2, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Batthew', email: "Matthew.M.Ramsey-1@ou.edu", m1: 2, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Urwin', email: "arwin@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Rake', email: "baerj@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Arwin', email: "arwin@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Jake', email: "baerj@ou.edu", m1: 2, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Batthew', email: "Matthew.M.Ramsey-1@ou.edu", m1: 2, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Urwin', email: "arwin@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Rake', email: "baerj@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Matthew', email: "Matthew.M.Ramsey-1@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Arwin', email: "arwin@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Jake', email: "baerj@ou.edu", m1: 2, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Batthew', email: "Matthew.M.Ramsey-1@ou.edu", m1: 2, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Urwin', email: "arwin@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Rake', email: "baerj@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Matthew', email: "Matthew.M.Ramsey-1@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Arwin', email: "arwin@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Jake', email: "baerj@ou.edu", m1: 2, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Batthew', email: "Matthew.M.Ramsey-1@ou.edu", m1: 2, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Urwin', email: "arwin@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Rake', email: "baerj@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Arwin', email: "arwin@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Jake', email: "baerj@ou.edu", m1: 2, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Batthew', email: "Matthew.M.Ramsey-1@ou.edu", m1: 2, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Urwin', email: "arwin@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Rake', email: "baerj@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Arwin', email: "arwin@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Jake', email: "baerj@ou.edu", m1: 2, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Batthew', email: "Matthew.M.Ramsey-1@ou.edu", m1: 2, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Urwin', email: "arwin@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Rake', email: "baerj@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Arwin', email: "arwin@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Jake', email: "baerj@ou.edu", m1: 2, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Batthew', email: "Matthew.M.Ramsey-1@ou.edu", m1: 2, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Urwin', email: "arwin@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-                        { name: 'Rake', email: "baerj@ou.edu", m1: 1, m2: 2, m3: 1, m4: 2, m5: 2 },
-
-                    ]
-                }
+                data= {this.state.data}
+                
                 columns={ columns }
                 search
                 >
@@ -132,7 +138,7 @@ class NStudentTable extends Component{
 
                         { ...props.baseProps }
                         />
-                        <button>Add Student</button>
+                        <button onClick= {this.addRow.bind(this)}>Add Student</button>
                         <button>Read Excel</button>
                         
                     </div>

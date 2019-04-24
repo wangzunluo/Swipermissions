@@ -40,13 +40,13 @@ th.sortable{
     border-collapse: collapse;
     font-size: 8px;
     overflow-y: auto !important;
-    height: 500px;
+    
     max-height: 500px;
     margin-top: 15px;
 }
 
 .problem{
-    height: 700px !important;
+    height: 700px;
     max-height: 500px;
 }
 

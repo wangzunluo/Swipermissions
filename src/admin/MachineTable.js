@@ -16,13 +16,13 @@ class MachineTable extends Component {
 
             <th className = "AS">Add Users</th>
           </tr>
-          <Machine name="Mill"></Machine>
-          <Machine name="Mill"></Machine>
-          <Machine name="Lathe"></Machine>
-          <Machine name="Lathe"></Machine>
-          <Machine name="CNC Mill"></Machine>
-          <Machine name="CNC Router"></Machine>
-          <Machine name="CNC Plasma"></Machine>
+          <Machine name="Mill" id= "1"></Machine>
+          <Machine name="Mill" id= "2"></Machine>
+          <Machine name="Lathe" id = "3"></Machine>
+          <Machine name="Lathe"  id = "4"></Machine>
+          <Machine name="CNC Mill" id = "5"></Machine>
+          <Machine name="CNC Router"  id = "6"></Machine>
+          <Machine name="CNC Plasma"  id = "7"></Machine>
 
         </tbody>
       </table>

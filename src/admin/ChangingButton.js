@@ -71,22 +71,51 @@ var today = new Date();
 var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 var time = today.getHours() + ":" + today.getMinutes();
 class ChangingButton extends React.Component {
-    constructor(){
-           super();
   
-           this.state = {
-                showPopup: false, 
+  constructor(props){
+    super(props);
+    //localStorage.clear();
+    if (JSON.parse(localStorage.getItem('green' + this.props.id) == undefined))
+    {
+      //var color = JSON.parse(localStorage.getItem('green' + this.props.id));
+      var color = true;
+    }
+    else
+    {
+      var color = JSON.parse(localStorage.getItem('green' + this.props.id));
+    }
+    this.state = 
+    {
+      showPopup: false, 
+      //id: this.props.id,
+      
+      green: color,
+    };
 
-                green: true,
-           }
-      }
+    this.checkOut = this.checkOut.bind(this);
+  }
       checkOut() {
-        this.setState({green: !this.state.green})
-        this.setState({
-            showPopup: !this.state.showPopup
-            
+        if (this.state.green)
+        {
+          alert("Checking out");
+          
+        }
+        else
+        {
+          alert("Checking in");
+        }
+        var itemName = 'green' + this.props.id;
+
+        this.setState({green: !this.state.green},() => 
+        {
+          localStorage.setItem(itemName, JSON.stringify(this.state.green))
         });
-        alert(date + " " + time);
+
+        this.setState({
+            //showPopup: !this.state.showPopup,
+
+        });
+        alert(date + " " + time + " " + this.props.id);
 
         /*
         fs.appendFile("testfile.txt", date, function (err) {
@@ -102,26 +131,28 @@ class ChangingButton extends React.Component {
       }
   
       changeColor(){
-          this.setState({green: !this.state.green})
+          this.setState({green: !this.state.green},() => {
+            localStorage.setItem('green', JSON.stringify(this.state.green))
+          });
       }
   
       render(){
-          let btn_class = this.state.green ? "greenButton" : "redButton";
-  
-          return (
-               <div>
-                   <Button variant ='outlined' className={btn_class} onClick={this.checkOut.bind(this)}>&nbsp;</Button>
-                        {this.state.showPopup ? 
-                        <Checkout
-                            
-                            closePopup={this.togglePopup.bind(this)}
-                        />
-                        : null
-                        }
-                    
+        let btn_class = this.state.green ? "greenButton" : "redButton";
 
-               </div>
-          )
+        return (
+          <div>
+            <Button variant ='outlined' className={btn_class} onClick={this.checkOut.bind(this)}>&nbsp;</Button>
+                {this.state.showPopup ? 
+                <Checkout
+                    
+                    closePopup={this.togglePopup.bind(this)}
+                />
+                : null
+                }
+              
+
+          </div>
+        )
       }
   }
 

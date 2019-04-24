@@ -13,7 +13,8 @@ class Machine extends Component {
     super();
     this.state = {
       showPopup: false, 
-      hasLoggedIn: false
+      hasLoggedIn: false,
+      logs: "",
     };
   }
   
@@ -28,7 +29,7 @@ class Machine extends Component {
       <tr className="Machine">
         <td className= "MName">{this.props.name}</td>
         <td className = "KeyBox">
-        <ChangingButton></ChangingButton>
+        <ChangingButton id= {this.props.id}></ChangingButton>
         </td>
         <td className = "InfoBox">
         <div className = 'Fourth'>        
