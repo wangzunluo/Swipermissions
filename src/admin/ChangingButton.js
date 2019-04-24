@@ -90,6 +90,7 @@ class ChangingButton extends React.Component {
       //id: this.props.id,
       
       green: color,
+      //green: this.props.green,
     };
 
     this.checkOut = this.checkOut.bind(this);
@@ -97,12 +98,12 @@ class ChangingButton extends React.Component {
       checkOut() {
         if (this.state.green)
         {
-          alert("Checking out");
+          //alert("Checking out");
           
         }
         else
         {
-          alert("Checking in");
+          //alert("Checking in");
         }
         var itemName = 'green' + this.props.id;
 
@@ -115,8 +116,9 @@ class ChangingButton extends React.Component {
             //showPopup: !this.state.showPopup,
 
         });
-        alert(date + " " + time + " " + this.props.id);
+        //alert(date + " " + time + " " + this.props.id);
 
+        this.props.triggerParentUpdate();
         /*
         fs.appendFile("testfile.txt", date, function (err) {
             if (err) throw err;
@@ -142,13 +144,14 @@ class ChangingButton extends React.Component {
         return (
           <div>
             <Button variant ='outlined' className={btn_class} onClick={this.checkOut.bind(this)}>&nbsp;</Button>
-                {this.state.showPopup ? 
+                
+                {/*this.state.showPopup ? 
                 <Checkout
                     
                     closePopup={this.togglePopup.bind(this)}
                 />
                 : null
-                }
+                */}
               
 
           </div>

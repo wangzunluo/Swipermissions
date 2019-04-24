@@ -10,7 +10,7 @@ import { Type } from 'react-bootstrap-table2-editor';
 
 const { SearchBar } = Search;
 const columns = [{
-  style: "color: white;",
+  //style: "color: white;",
   dataField: 'name',
   text: 'Name'
 }, {
