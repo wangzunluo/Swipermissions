@@ -23,8 +23,17 @@ th.sortable{
 .table-bordered thead th{
     color: white;
     background-color: darkred;
+    border: 2px solid black;
+
 }
 .table-bordered thead tr{
+    border: 2px solid black;
+
+}
+
+.table-bordered tbody td{
+    border: 2px solid black;
+
 }
 
 .table-bordered tbody{
@@ -32,6 +41,8 @@ th.sortable{
     max-height: 500px !important;
     height: 500px;
     background-color: white;
+    border: 2px solid black;
+
 
 }
 
@@ -40,7 +51,7 @@ th.sortable{
     border-collapse: collapse;
     font-size: 8px;
     overflow-y: auto !important;
-    
+    border: 2px solid black;
     max-height: 500px;
     margin-top: 15px;
 }
@@ -48,10 +59,12 @@ th.sortable{
 .problem{
     height: 700px;
     max-height: 500px;
+    
 }
 
 .table-bordered>.thead{
     color: white !important;
+    border: 2px solid black;
 
 }
 
@@ -64,6 +77,7 @@ th.sortable{
 .react-bootstrap-table{
     overflow-y: auto !important;
     max-height: 90% !important;
+    
 }
 .order>.dropdown>.caret{margin:10px 0 10px 5px;color:#ccc}
 .react-bootstrap-table th .order>.dropup>.caret{margin:10px 0;color:#ccc}
