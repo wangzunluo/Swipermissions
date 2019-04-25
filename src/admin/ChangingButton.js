@@ -95,68 +95,70 @@ class ChangingButton extends React.Component {
 
     this.checkOut = this.checkOut.bind(this);
   }
-      checkOut() {
-        if (this.state.green)
-        {
-          //alert("Checking out");
-          
-        }
-        else
-        {
-          //alert("Checking in");
-        }
-        var itemName = 'green' + this.props.id;
 
-        this.setState({green: !this.state.green},() => 
-        {
-          localStorage.setItem(itemName, JSON.stringify(this.state.green))
-        });
+  checkOut() 
+  {
+    if (this.state.green)
+    {
+      //alert("Checking out");
+      
+    }
+    else
+    {
+      //alert("Checking in");
+    }
+    var itemName = 'green' + this.props.id;
 
-        this.setState({
-            //showPopup: !this.state.showPopup,
+    this.setState({green: !this.state.green},() => 
+    {
+      localStorage.setItem(itemName, JSON.stringify(this.state.green))
+    });
 
-        });
-        //alert(date + " " + time + " " + this.props.id);
+    this.setState({
+        //showPopup: !this.state.showPopup,
 
-        this.props.triggerParentUpdate();
-        /*
-        fs.appendFile("testfile.txt", date, function (err) {
-            if (err) throw err;
-            console.log('Saved!'); });
-            */
-      }
-      togglePopup() {
-        this.setState({
-          showPopup: !this.state.showPopup
-          
-        });
-      }
-  
-      changeColor(){
-          this.setState({green: !this.state.green},() => {
-            localStorage.setItem('green', JSON.stringify(this.state.green))
-          });
-      }
-  
-      render(){
-        let btn_class = this.state.green ? "greenButton" : "redButton";
+    });
+    //alert(date + " " + time + " " + this.props.id);
 
-        return (
-          <div>
-            <Button variant ='outlined' className={btn_class} onClick={this.checkOut.bind(this)}>&nbsp;</Button>
-                
-                {/*this.state.showPopup ? 
-                <Checkout
-                    
-                    closePopup={this.togglePopup.bind(this)}
-                />
-                : null
-                */}
+    this.props.triggerParentUpdate();
+    /*
+    fs.appendFile("testfile.txt", date, function (err) {
+        if (err) throw err;
+        console.log('Saved!'); });
+        */
+  }
+  togglePopup() {
+    this.setState({
+      showPopup: !this.state.showPopup
+      
+    });
+  }
+
+  changeColor(){
+      this.setState({green: !this.state.green},() => {
+        localStorage.setItem('green', JSON.stringify(this.state.green))
+      });
+  }
+
+    render(){
+      let btn_class = this.state.green ? "greenButton" : "redButton";
+
+      return (
+        <div>
+          <Button variant ='outlined' className={btn_class} onClick={this.checkOut.bind(this)}>&nbsp;</Button>
               
+              {/*this.state.showPopup ? 
+              <Checkout
+                  
+                  closePopup={this.togglePopup.bind(this)}
+              />
+              : null
+              */}
+            
 
-          </div>
-        )
-      }
+        </div>
+      )
+    }
   }
 
   export default ChangingButton
