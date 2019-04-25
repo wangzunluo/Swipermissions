@@ -33,7 +33,7 @@ th.sortable{
 
 .table-bordered tbody td{
     border: 2px solid black;
-
+    text-align: center;
 }
 
 .table-bordered tbody{
