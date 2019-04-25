@@ -89,39 +89,6 @@ class NStudentTable extends Component{
     {
         
         var newArray = this.state.data.slice();   
-        /*
-        render(); {
-            return (
-              <div className='Login'>
-                <div className='Login_inner'>
-                  <div className='Close_bar'>
-                    <button className ='closer' onClick={this.props.closePopup}>X</button>
-                  </div>
-                  <Greeting isLoggedIn={this.state.password !== ''} />
-        
-                  <div className ='SignIn'>
-                  Sign In
-                    <form className='SignForm' onSubmit={this.handleSubmit}>
-                    User ID: 
-                      <label className='UserBar'>
-                        
-                        <input type="text" value={this.state.user} onChange={this.handleChangeUser} />
-                      </label>
-                    Password: 
-                      <label className='PasswordBar'>
-                        
-                        <input type="text" value={this.state.password} onChange={this.handleChangePassword} />
-                      </label>
-                      <input type="submit" value="Submit" />
-                    </form>
-                  </div>
-        
-                </div>
-         
-              </div>
-            );
-          }
-          */
 
         newArray.push({ name: 'Jake', email: "baerj@ou.edu", m1: 2, m2: 2, m3: 1, m4: 2, m5: 2 });   
         this.setState({data:newArray});
