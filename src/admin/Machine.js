@@ -45,7 +45,7 @@ function findTime()
 class Machine extends Component {
   constructor(props) {
     super(props);
-    //localStorage.clear();
+    localStorage.clear();
 
     var oldlog = "";
     var oldCheck = false;

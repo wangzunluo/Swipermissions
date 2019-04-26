@@ -20,46 +20,139 @@ const columns = [{
   dataField: 'm1',
   text: 'Mill',
   lookup: {1: 'yes', 2: 'no'},
-  formatter: cellFormatter
+  formatter: cellFormatter1
 },
 {
 
     dataField: 'm2',
     text: 'Lathe',
     lookup: {1: 'yes', 2: 'no'},
-    formatter: cellFormatter
+    formatter: cellFormatter2
 },
 {
 
     dataField: 'm3',
     text: 'CNC Mill',
     lookup: {1: 'yes', 2: 'no'},
-    formatter: cellFormatter
+    formatter: cellFormatter3
 },
 {
 
     dataField: 'm4',
     text: 'CNC Router',
     lookup: {1: 'yes', 2: 'no'},
-    formatter: cellFormatter
+    formatter: cellFormatter4
 },
 {
 
     dataField: 'm5',
     text: 'CNC Plasma',
     lookup: {1: 'yes', 2: 'no'},
-    formatter: cellFormatter
+    formatter: cellFormatter5
 }];
 
-function cellFormatter(cell, row) {
-  if (cell == 2) {
-    return (
-      <input
-            type="checkbox"
-            checked
-            />
-    );
-  }
+function saveCheck(spot, toCheck)
+{
+    //var spot = row + "-" + column;
+    //localStorage.setItem("check" + spot, JSON.stringify(!toCheck));
+    alert("reached" + spot);
+}
+
+function cellFormatter1(cell,row, rowIndex) {
+    //alert(rowIndex + "-" + 1);
+    var spot = rowIndex + "-" + 1;
+    var toCheck = false;
+
+    if (!(JSON.parse(localStorage.getItem("check" + spot)) == undefined))
+    {
+        toCheck = JSON.parse(localStorage.getItem("check" + spot));
+        alert(toCheck);
+    }
+
+    /*
+    if (cell == 2) {
+        //alert(row)
+        //alert(rowIndex);
+        return (
+            <input
+                type="checkbox"
+                checked
+                />
+        );
+    }
+    */
+
+  return (
+    <input type="checkbox" onClick= {saveCheck(spot, toCheck)}/>
+  );
+}
+
+function cellFormatter2(cell, row, rowIndex) {
+  
+    if (cell == 2) {
+        //alert(row)
+        //alert(rowIndex);
+        return (
+            <input
+                type="checkbox"
+                checked
+                />
+        );
+    }
+
+  return (
+    <input type="checkbox"/>
+  );
+}
+
+function cellFormatter3(cell, row, rowIndex) {
+  
+    if (cell == 2) {
+        //alert(row)
+        //alert(rowIndex);
+        return (
+            <input
+                type="checkbox"
+                checked
+                />
+        );
+    }
+
+  return (
+    <input type="checkbox"/>
+  );
+}
+
+function cellFormatter4(cell, row, rowIndex) {
+  
+    if (cell == 2) {
+        //alert(row)
+        //alert(rowIndex);
+        return (
+            <input
+                type="checkbox"
+                checked
+                />
+        );
+    }
+
+  return (
+    <input type="checkbox"/>
+  );
+}
+
+function cellFormatter5(cell, row, rowIndex) {
+  
+    if (cell == 2) {
+        //alert(row)
+        //alert(rowIndex);
+        return (
+            <input
+                type="checkbox"
+                checked
+                />
+        );
+    }
 
   return (
     <input type="checkbox"/>
