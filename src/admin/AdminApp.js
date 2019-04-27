@@ -3,6 +3,10 @@ import React, { Component } from 'react';
 import './AdminApp.css';
 import NStudentTable from "./NStudentTable";
 
+function clearStorage()
+{
+    localStorage.clear();
+}
 
 class AdminApp extends Component
 {
@@ -11,6 +15,7 @@ class AdminApp extends Component
             <div className = "Wrapper">
                 <div className = "Banner">
                 Admin View
+                <button onClick= {clearStorage}>Clear Storage</button>
                 </div>
                 <div className = "Top">
                     <div className = "StudentTable">
@@ -20,6 +25,7 @@ class AdminApp extends Component
                     <div className = "MachineTable">
                     <MachineTable></MachineTable>
                     </div>
+
 
                 </div>
             </div>
