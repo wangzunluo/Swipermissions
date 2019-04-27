@@ -1,10 +1,6 @@
-import StudentTable from "./StudentTable";
 import MachineTable from './MachineTable';
-import LogTable from "./LogTable";
 import React, { Component } from 'react';
 import './AdminApp.css';
-import MaterialTable from "material-table";
-import SearchIcon from "material-icons";
 import NStudentTable from "./NStudentTable";
 
 

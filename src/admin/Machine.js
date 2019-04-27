@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import './Machine.css';
 import ChangingButton from "./ChangingButton"
-import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
-import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 import InfoIcon from '@material-ui/icons/Info'
 
@@ -11,34 +9,29 @@ function findTime()
 {
   var today = new Date();
   var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  var sign = "P.M.";
+  var hour = today.getHours();
+  var minute = today.getMinutes();
+
   if (today.getHours() < 12)
   {
-    var sign = "A.M.";
-  }
-  else{
-    var sign = "P.M.";
+    sign = "A.M.";
   }
 
-  if (today.getHours() > 12)
+  if (hour > 12)
   {
-    var hour = today.getHours() - 12;
+    hour = hour - 12;
   }
-  else if (today.getHours() == 0)
+  else if (hour == 0)
   {
-    var hour = 12;
-  }
-  else
-  {
-    var hour = today.getHours();
+    hour = 12;
   }
 
-  if (today.getMinutes() < 10)
+  if (minute < 10)
   {
-    var minute = "0" + today.getMinutes();
+    minute = "0" + minute;
   }
-  else{
-    var minute = today.getMinutes();
-  }
+
   return date + " " + hour + ":" + minute + " " + sign;
 }
 
@@ -50,20 +43,26 @@ class Machine extends Component {
     var oldlog = "";
     var oldCheck = false;
     var oldUser = "";
+    var isGreen = true;
 
     if (!(JSON.parse(localStorage.getItem('log' + this.props.id) == undefined)))
     {
-      var oldlog = JSON.parse(localStorage.getItem('log' + this.props.id));
+      oldlog = JSON.parse(localStorage.getItem('log' + this.props.id));
     }
 
     if (!(JSON.parse(localStorage.getItem('checkedOut' + this.props.id) == undefined)))
     {
-      var oldCheck = JSON.parse(localStorage.getItem('checkedOut' + this.props.id));
+      oldCheck = JSON.parse(localStorage.getItem('checkedOut' + this.props.id));
     }
 
     if (!(JSON.parse(localStorage.getItem('user' + this.props.id) == undefined)))
     {
-      var oldUser = JSON.parse(localStorage.getItem('user' + this.props.id));
+      oldUser = JSON.parse(localStorage.getItem('user' + this.props.id));
+    }
+
+    if (!(JSON.parse(localStorage.getItem('green' + this.props.id) == undefined)))
+    {
+      isGreen = JSON.parse(localStorage.getItem('green' + this.props.id));
     }
 
     this.state = {
@@ -73,6 +72,7 @@ class Machine extends Component {
       checkedOut: oldCheck,
       user: oldUser,
       id: this.props.id,
+      green: isGreen,
     };
 
     this.togglePopup = this.togglePopup.bind(this);
@@ -116,7 +116,7 @@ class Machine extends Component {
       <tr className="Machine">
         <td className= "MName">{this.props.name}</td>
         <td className = "KeyBox">
-        <ChangingButton id= {this.props.id} triggerParentUpdate= {this.togglePopup.bind(this)}></ChangingButton>
+        <ChangingButton green = {this.state.green} id= {this.props.id} triggerParentUpdate= {this.togglePopup.bind(this)}></ChangingButton>
         {this.state.showPopup ? 
           <Checkout 
             id = {this.state.id}
@@ -170,9 +170,6 @@ class Checkout extends Machine {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-
-  
-
   handleChangeUser(event) {
     this.setState({user: event.target.value});
   }
@@ -180,41 +177,24 @@ class Checkout extends Machine {
   handleSubmit(event) {
     if (this.state.user !== '')
     {
-
       localStorage.setItem("user" + this.state.id, JSON.stringify(this.state.user));
+      localStorage.setItem("checkedOut" + this.state.id, JSON.stringify(!this.props.checkedOut));
       
-      var realCheck = !this.props.checkedOut;
-
-      localStorage.setItem("checkedOut" + this.state.id, JSON.stringify(realCheck));
-      
-
       var timestr = findTime();
-
-      var pastLog = this.props.logs;
-      
-      if (realCheck)
-      {
-        var newLog =  pastLog + this.state.user + ": " + timestr + "  --  ";
-        
-      }
-      else
-      {
-        var newLog = pastLog + timestr + "\n";
-
-      }
-
+      var newLog =  this.props.logs + this.state.user + ": " + timestr + "  --  ";
 
       var itemName = 'log' + this.props.id;
-
       localStorage.setItem(itemName, JSON.stringify(newLog));
       localStorage.removeItem("user" + this.props.id);
+      
+      localStorage.setItem("green" + this.props.id, false);
         this.setState(
           {
             user: ""
           }
         );
     }
-    else if (this.state.user === '')
+    else if (this.state.user == '')
     {
       alert("Please enter a user");
       event.preventDefault();
@@ -224,7 +204,7 @@ class Checkout extends Machine {
   render() {
     return (
       <div className='Login'>
-        <div className='Login_inner'>
+        <div className='Login_inner1'>
           <div className='Close_bar'>
             <button className ='closer' onClick={this.props.closePopup}>X</button>
           </div>
@@ -232,8 +212,7 @@ class Checkout extends Machine {
           <div className ='SignIn'>
             <form className='SignForm' onSubmit={this.handleSubmit}>
             Check out to?
-              <label className='UserBar'>
-                
+              <label className='UserBar'>              
                 <input type="text" value={this.state.user} onChange={this.handleChangeUser} />
               </label>
               <input type="submit" value="Submit" />
@@ -266,50 +245,27 @@ class Checkin extends Machine {
 
   handleSubmit(event)
   {
-    if (this.state.time !== '')
-    {
+    var realCheck = !this.props.checkedOut;
+    localStorage.setItem("checkedOut" + this.props.id, JSON.stringify(realCheck));
+    var pastLog = this.props.logs;
+    var newLog = pastLog + this.state.time + "\n";
+    var itemName = 'log' + this.props.id;
 
-      //localStorage.setItem("user" + this.state.id, JSON.stringify(this.state.user));
-      
-      var realCheck = !this.props.checkedOut;
-
-      localStorage.setItem("checkedOut" + this.props.id, JSON.stringify(realCheck));
-      
-
-      var pastLog = this.props.logs;
-      
-      var newLog = pastLog + this.state.time + "\n";
-
-      var itemName = 'log' + this.props.id;
-
-      localStorage.setItem(itemName, JSON.stringify(newLog));
-      
+    if (this.state.time == '')
+    {    
+      var timestr = findTime();  
+      newLog = pastLog + timestr + "\n";
     }
-    else if (this.state.time === '')
-    {
-      //alert("Please enter a user");
-      //event.preventDefault();
-      var realCheck = !this.props.checkedOut;
+    localStorage.setItem(itemName, JSON.stringify(newLog));
+    
+    localStorage.setItem("green" + this.props.id, true);
 
-      localStorage.setItem("checkedOut" + this.props.id, JSON.stringify(realCheck));
-      
-
-      var timestr = findTime();
-      alert(timestr);
-      var pastLog = this.props.logs;
-      
-      var newLog = pastLog + timestr + "\n";
-
-      var itemName = 'log' + this.props.id;
-
-      localStorage.setItem(itemName, JSON.stringify(newLog));
-    }
   }
 
   render() {
     return (
       <div className='Login'>
-        <div className='Login_inner'>
+        <div className='Login_inner1'>
           <div className='Close_bar'>
             <button className ='closer' onClick={this.props.closePopup}>X</button>
           </div>

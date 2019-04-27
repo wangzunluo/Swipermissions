@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './landing/App';
+//import App from './landing/App';
 import TaApp from './ta/TaApp';
 import AdminApp from './admin/AdminApp';
 import * as serviceWorker from './serviceWorker';

@@ -1,15 +1,13 @@
-import BootstrapTable, {TableHeaderColumn} from 'react-bootstrap-table-next';
+import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import './react-bootstrap-table2.min.css' ;
 import React, { Component } from 'react';
-import { Type } from 'react-bootstrap-table2-editor';
 
 //import './bootstrap.css'
 
 
 const { SearchBar } = Search;
 const columns = [{
-  //style: "color: white;",
   dataField: 'name',
   text: 'Name',
 }, {
@@ -179,33 +177,32 @@ function cellFormatter5(cell, row, rowIndex) {
 }
 
 class NStudentTable extends Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
+        //localStorage.clear();
+        var oldData = [];
+
+        if (!(JSON.parse(localStorage.getItem('data')) == undefined))
+        {
+            oldData = JSON.parse(localStorage.getItem('data'));
+        }
+
         this.state = 
         {
-            data:JSON.parse(localStorage.getItem('data')) ||
-            [
-                { name: 'Matthew Ramsey', email: "Matthew.M.Ramsey-1@ou.edu",},
-                { name: 'Arwin', email: "arwin@ou.edu",},
-                { name: 'Jake', email: "baerj@ou.edu",},
-                { name: 'Matthew Ramsey', email: "Matthew.M.Ramsey-1@ou.edu",},
-                { name: 'Arwin', email: "arwin@ou.edu",},
-
-            ]
+            data: oldData,
+            showPopup: false,
         };
 
-        this.addRow = this.addRow.bind(this);
+        this.togglePopup = this.togglePopup.bind(this);
     }
 
-    addRow()
+    togglePopup()
     {
-        
-        var newArray = this.state.data.slice();   
-
-        newArray.push({ name: 'Jake', email: "baerj@ou.edu",});   
-        this.setState({data:newArray});
-        localStorage.setItem('data', JSON.stringify(newArray));
-
+        this.setState(
+            {
+                showPopup: !this.state.showPopup
+            }
+        );
     }
 
     render() {
@@ -230,7 +227,14 @@ class NStudentTable extends Component{
                          bootstrap4 = {true}
                         { ...props.baseProps }
                         />
-                        <button onClick= {this.addRow.bind(this)}>Add Student</button>
+                        <button onClick= {this.togglePopup.bind(this)}>Add Student</button>
+                        {this.state.showPopup ? 
+                            <AddPrompt 
+                                data = {this.state.data}
+                                closePopup={this.togglePopup.bind(this)}
+                            />
+                            : null
+                        }
                         <button>Read Excel</button>
                         
                     </div>
@@ -240,6 +244,80 @@ class NStudentTable extends Component{
         )
     }
 }
+
+class AddPrompt extends NStudentTable {
+    constructor(props) {
+      super(props);
+      this.state = 
+      {
+        data: this.props.data,
+        newName: '',
+        newContact: '',
+        //id: this.props.id,
+      };
+  
+      this.handleChangeUser = this.handleChangeUser.bind(this);
+      this.handleChangeContact = this.handleChangeContact.bind(this);
+
+  
+      this.handleSubmit = this.handleSubmit.bind(this);
+    }
+  
+    handleChangeUser(event) {
+      this.setState({newName: event.target.value});
+    }
+
+    handleChangeContact(event) {
+        this.setState({newContact: event.target.value});
+    }
+  
+    handleSubmit(event) {
+      if (this.state.newName !== '')
+      {
+        var newArray = this.state.data.slice();   
+        newArray.push({ name: this.state.newName, email: this.state.newContact,});   
+        this.setState({data:newArray});
+        localStorage.setItem('data', JSON.stringify(newArray));
+        
+      }
+      else if (this.state.newName == '')
+      {
+        alert("Please enter a user");
+        event.preventDefault();
+      }
+    }
+  
+    render() {
+      return (
+        <div className='Login'>
+          <div className='Login_inner'>
+            <div className='Close_bar'>
+              <button className ='closer' onClick={this.props.closePopup}>X</button>
+            </div>
+            
+            <div className ='SignIn'>
+            Add a User
+              <form className='SignForm' onSubmit={this.handleSubmit}>
+                New User's Name:
+                <label className='UserBar'>
+                  
+                  <input type="text" value={this.state.newName} onChange={this.handleChangeUser} />
+                </label>
+                Contact Info:
+                <label className='PasswordBar'>
+                    
+                    <input type="text" value={this.state.newContact} onChange={this.handleChangeContact} />
+                </label>
+                <input type="submit" value="Submit" />
+              </form>
+            </div>
+  
+          </div>
+   
+        </div>
+      );
+    }
+  }
 
 export default NStudentTable;
 

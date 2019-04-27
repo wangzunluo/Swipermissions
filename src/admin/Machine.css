@@ -68,19 +68,21 @@
     right: 0;
     bottom: 0;
     margin: auto;
+    z-index: 10000;
     background-color: rgba(0,0,0, 0.5);
   
   }
-  .Login_inner {
+  .Login_inner1 {
     position: absolute;
     left: 40%;
     right: 40%;
-    top: 25%;
-    bottom: 25%;
+    top: 30%;
+    bottom: 50%;
+    z-index: 1000;
   
-    background: skyblue;
+    background: lightgray;
     color: red;
-    border: solid blue 5px;
+    border: solid black 2px;
   }
   
   .Close_bar
