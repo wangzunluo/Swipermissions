@@ -2,17 +2,22 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import XLSX from 'xlsx'
+import "./excel.css"
 
-import { withFirebase } from '../Firebase';
+import { withFirebase } from '../../../Firebase';
 
-class PageBase extends Component {
+class ReadExcel extends Component {
+  constructor(props) {
+      super(props)
+      this.ex = React.createRef()
+  }
 
   componentDidMount() {
-    this.ex.addEventListener("change", this.handleExcelFile, false);
+    this.ex.current.addEventListener("change", this.handleExcelFile, false);
   }
 
   componentWillUnmount() {
-    this.ex.removeEventListener("change", this.handleExcelFile, false);
+    this.ex.current.removeEventListener("change", this.handleExcelFile, false);
   }
 
   handleExcelFile = (event) => {
@@ -56,20 +61,27 @@ class PageBase extends Component {
     this.props.firebase.doArwin()
   }
 
+  readExcel = () => {
+    const node = this.ex.current
+    node.click()
+  }
+
   render() {
 
     return (
       <div>
-        <button onClick={this.showData}>TEST</button>
-        <input ref={elem => this.ex = elem} type="file" className="ex" />
+          <button onClick={ this.readExcel } >Read Excel</button>
+          <input ref={ this.ex } type="file" className="ex" />
       </div>
+      
     );
   }
 }
 
-const HomePage = compose(
+const ExcelButton = compose(
   withRouter,
   withFirebase,
-)(PageBase);
+)(ReadExcel);
 
-export { HomePage };
+
+export { ExcelButton };

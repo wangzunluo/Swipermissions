@@ -2,6 +2,8 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import './react-bootstrap-table2.min.css' ;
 import React, { Component } from 'react';
+import { ExcelButton } from './excel';
+
 
 //import './bootstrap.css'
 
@@ -176,9 +178,11 @@ function cellFormatter5(cell, row, rowIndex) {
   );
 }
 
+
 class NStudentTable extends Component{
     constructor(props){
         super(props);
+
         //localStorage.clear();
         var oldData = [];
 
@@ -204,6 +208,7 @@ class NStudentTable extends Component{
             }
         );
     }
+
 
     render() {
         return(
@@ -235,8 +240,7 @@ class NStudentTable extends Component{
                             />
                             : null
                         }
-                        <button>Read Excel</button>
-                        
+                        <ExcelButton />
                     </div>
                     )
                 }
