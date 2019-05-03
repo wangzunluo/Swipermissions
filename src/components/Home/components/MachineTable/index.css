@@ -1,0 +1,31 @@
+.MachineTable{
+  font-size: 8px;
+  margin-left: 0px;
+  border-collapse: collapse;
+}
+
+.Titles{
+  background-color: darkred;
+  color: white;
+}
+
+.AS{
+  font-weight: bold;
+  margin-top: 0px;
+  border: 2px solid black;
+}
+
+.KeyHistory
+{
+  border: 2px solid black;
+}
+
+.Keys{
+  border: 2px solid black;
+}
+
+.chart{
+  margin-top: 0px;
+  margin-left: 0px;
+  border-collapse: collapse;
+}

@@ -1,0 +1,274 @@
+.html{
+    overflow: hidden;
+    height: 100%;
+}
+
+.body{
+    overflow: hidden;
+    height: 100%;
+}
+
+.Wrapper
+{
+    height: 100%;
+    display: inline;
+    overflow-y: hidden;
+}
+
+.root{
+    overflow-y: hidden;
+}
+
+.StudentTable{
+    width: auto;
+    height: auto;
+    margin-left: 5%;
+    bottom: 0;
+    overflow-y: auto;
+    float: left;
+
+    margin-right: 5%;
+}
+
+.ST{
+    overflow-y: auto;
+}
+
+.MT{
+    position: absolute;
+    float: right;
+}
+
+.MachineTable{
+    grid-column: 3;
+    grid-row: 1;
+    border: 0;
+    margin-left: 0%;
+    left: 25%;
+    float: left;
+}
+
+.MuiTableCell-root-151
+{
+    border: 0;
+}
+
+.LogTable{
+    grid-column: 3;
+    grid-row: 1;
+    margin-left: 10%;
+    margin-bottom: 10%;
+    float: right;
+    margin-top: 25%;
+
+}
+
+.Banner{
+    text-align: center;
+    background-color: darkred;
+    color: white;
+    height: auto;
+    grid-row: 1;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.MatTable
+{
+    font-size: 8px;
+}
+
+.Top{
+
+    margin-top: 50px;
+    background-color: wheat;
+    max-height: 70% !important;
+    width: 100%;
+    display: inline-block;
+}
+
+.App {
+text-align: center;
+}
+
+.TopContainer {
+text-align: center;
+position: relative;
+top: 0px;
+background-color: #841617;
+color: #fff;
+}
+
+.BottomContainer 
+{
+background-color: wheat;
+bottom: 0;
+
+}
+
+.Wrapper
+{
+height: 100%
+
+}
+
+.logButton
+{
+float: right;
+margin-left: 10px;
+margin-top:10px;
+}
+
+button
+{
+  float: right;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.Login {
+position: fixed;
+width: 100%;
+height: 100%;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+margin: auto;
+background-color: rgba(0,0,0, 0.5);
+
+}
+.Login_inner {
+position: absolute;
+left: 40%;
+right: 40%;
+top: 25%;
+bottom: 25%;
+
+background: skyblue;
+color: red;
+border: solid blue 5px;
+}
+
+.Close_bar
+{
+width: 100%;
+float: top;
+display: block;
+}
+
+.closer
+{
+float: top;
+border: solid red 1px;
+color: red;
+margin: 0px;
+}
+
+.SignIn
+{
+color: black;
+margin-top: 30px;
+font-size: 1em;
+font-weight: bold;
+}
+
+.SignForm
+{
+margin-top: 40px;
+}
+
+.UserBar
+{
+display: block;
+margin-bottom: 20px;
+
+}
+
+.PasswordBar
+{
+margin-bottom: 20px;
+display: block;
+}
+
+.Title {
+display: inline-block;
+text-align: center;
+width: 60%;
+font-size: 2em;
+font-weight: bold;
+}
+
+.TopRight
+{
+float: right;
+width:20%;
+
+}
+
+.TopLeft
+{
+float: left;
+
+text-align: center;
+width:20%;
+}
+
+.MainContainer {
+position: fixed;
+width: 100%;
+}
+
+.TableInner {
+width: 100%
+}
+
+html, body
+{
+height: 100%;
+background-color: wheat
+}
+
+#root
+{
+height: 100%;
+}
+
+.MainTable {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    border: 3px solid black;
+    border-collapse: collapse
+  }
+  
+  th
+  {
+    font-size: 2em;
+    border: 3px solid black
+  }
+
+  .TableRow {
+    border-style: solid;
+    text-align: center;
+    border: 3px solid black;
+    border-collapse: collapse
+  }
+  
+  .UnavailableStyle
+  {
+    background-color: crimson;
+  }
+  
+  .AvailableStyle
+  {
+    background-color: green;
+  }
+  
+  td
+  {
+    font-size: 2em;
+    border: 3px solid black;
+    border-collapse: collapse;
+  }
