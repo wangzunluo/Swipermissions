@@ -48,12 +48,17 @@ class ReadExcel extends Component {
   parseCSV = (csv) => {
     let rows = csv.split('\n')
     let attributes = rows[0].split('\t')
-    
+
+    let parsedAttributes = []
+    attributes.forEach((str) => {
+        str = str.replace(/\s+/g, '');
+        parsedAttributes.push(str)
+
+    })
 
     for(let i=1; i<rows.length-1; i++)
     {
-      console.log(rows[i].split('\t'))
-      this.props.firebase.writeUser(attributes, rows[i].split('\t'))
+      this.props.firebase.writeUser(parsedAttributes, rows[i].split('\t'))
     }
   }
 

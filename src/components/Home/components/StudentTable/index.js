@@ -3,7 +3,10 @@ import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import './react-bootstrap-table2.min.css' ;
 import React, { Component } from 'react';
 import { ExcelButton } from './excel';
+import { compose } from 'recompose';
+import { withRouter } from 'react-router-dom';
 
+import { withFirebase } from '../../../Firebase';
 
 //import './bootstrap.css'
 
@@ -188,6 +191,7 @@ class NStudentTable extends Component{
 
         if (!(JSON.parse(localStorage.getItem('data')) == undefined))
         {
+            console.log(oldData)
             oldData = JSON.parse(localStorage.getItem('data'));
         }
 
@@ -198,6 +202,21 @@ class NStudentTable extends Component{
         };
 
         this.togglePopup = this.togglePopup.bind(this);
+    }
+
+    componentDidMount() {
+      this.props.firebase.readOnce().then((value) => {
+        if (value) this.parseData(value)
+      })
+    }
+
+    parseData = (data) => {
+      let parsed = []
+
+      data.forEach((row) => {
+        parsed.push({name: row.FirstName, email: row.Email})
+      })
+      this.setState({data: parsed})
     }
 
     togglePopup()
@@ -323,5 +342,11 @@ class AddPrompt extends NStudentTable {
     }
   }
 
-export default NStudentTable;
+
+const StudentTable = compose(
+    withRouter,
+    withFirebase,
+  )(NStudentTable);
+
+export { StudentTable };
 

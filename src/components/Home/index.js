@@ -1,6 +1,6 @@
 import React from 'react'
 import MachineTable from './components/MachineTable';
-import StudentTable from './components/StudentTable';
+import { StudentTable } from './components/StudentTable';
 
 import './index.css';
 
