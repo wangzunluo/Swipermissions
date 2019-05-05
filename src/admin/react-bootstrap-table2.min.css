@@ -10,6 +10,12 @@ th.sortable{
     cursor:pointer
 }
 
+.Deleter
+{
+  margin: 0;
+  width: 100%;
+}
+
 .myTable{
     max-height: 0px !important;
 }
@@ -126,7 +132,7 @@ th.sortable{
     color: black;
     margin-top: 30px;
     font-size: 1em;
-    font-weight: bold;
+    font-weight: normal;
   }
   
   .SignForm

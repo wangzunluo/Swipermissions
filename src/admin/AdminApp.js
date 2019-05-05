@@ -20,6 +20,8 @@ class AdminApp extends Component
                 <div className = "Top">
                     <div className = "StudentTable">
                         <NStudentTable></NStudentTable>
+                        *Do not delete a student while using the search bar, as this will cause errors
+
                     </div>
 
                     <div className = "MachineTable">

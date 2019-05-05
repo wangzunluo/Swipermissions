@@ -5,11 +5,12 @@ import React, { Component } from 'react';
 
 //import './bootstrap.css'
 
-
+var searching = false;
 const { SearchBar } = Search;
 const columns = [{
   dataField: 'name',
   text: 'Name',
+  formatter: nameSetter
 }, {
   dataField: 'email',
   text: 'Contact'
@@ -32,23 +33,74 @@ const columns = [{
 {
     text: 'CNC Plasma',
     formatter: cellFormatter5
+},
+{
+    text: 'Remove',
+    formatter: deleteFormatter
 }];
 
-function saveCheck(spot, toCheck)
+function nameSetter(cell, row, rowIndex)
+{
+  localStorage.setItem("student" + rowIndex, JSON.stringify(cell));
+  //alert(rowIndex + "?" + JSON.parse(localStorage.getItem("student" + rowIndex)));
+  return (
+    cell
+  )
+    //alert(cell)
+    //return (
+      //<div>cell</div>
+      
+    //)
+}
+
+function saveCheck(col, toCheck, name)
 {
     //var spot = row + "-" + column;
-    localStorage.setItem("check" + spot, JSON.stringify(!toCheck));
+    //alert(name);
+
+    localStorage.setItem(name + "" + col, JSON.stringify(!toCheck));
     //alert("reached" + spot);
+}
+
+function deleter(rowIndex)
+{
+  var oldData = JSON.parse(localStorage.getItem('data'));
+  oldData.splice(rowIndex, 1);
+  localStorage.setItem("data", JSON.stringify(oldData));
+  var tName = JSON.parse(localStorage.getItem("student" + rowIndex));
+  alert(tName);
+  for (var i = 1; i < 6; i++)
+  {
+      localStorage.setItem(tName + "" + i, JSON.stringify(false));
+  }
+}
+
+function deleteFormatter(cell, row, rowIndex)
+{
+    return (
+      <button className = "Deleter" onClick= {() => deleter(rowIndex)}>Delete</button>
+      //<button className = "Deleter" onClick= {props.onClick}>Delete</button>
+
+    )
 }
 
 function cellFormatter1(cell,row, rowIndex) {
     //alert(rowIndex + "-" + 1);
-    var spot = rowIndex + "-" + 1;
+    //var spot = rowIndex + "-" + 1;
+    
     var toCheck = false;
 
-    if (!(JSON.parse(localStorage.getItem("check" + spot)) == undefined))
+    var tName = "";
+    
+    if (!(JSON.parse(localStorage.getItem("student" + rowIndex)) == undefined))
     {
-        toCheck = JSON.parse(localStorage.getItem("check" + spot));
+        tName = JSON.parse(localStorage.getItem("student" + rowIndex));
+        //alert(tName);
+    }
+
+    if (!(JSON.parse(localStorage.getItem(tName + "" + 1)) == undefined))
+    {
+        toCheck = JSON.parse(localStorage.getItem(tName + "" + 1));
         //alert(toCheck);
     }
 
@@ -58,13 +110,14 @@ function cellFormatter1(cell,row, rowIndex) {
             <input
                 type="checkbox"
                 checked
+                onClick= {() => saveCheck(1, toCheck, tName)}
                 />
         );
     }
     
 
   return (
-    <input type="checkbox" onClick= {() => saveCheck(spot, toCheck)}/>
+    <input type="checkbox" onClick= {() => saveCheck(1, toCheck, tName)}/>
   );
 }
 
@@ -73,9 +126,17 @@ function cellFormatter2(cell, row, rowIndex) {
     var spot = rowIndex + "-" + 2;
     var toCheck = false;
 
-    if (!(JSON.parse(localStorage.getItem("check" + spot)) == undefined))
+    var tName = "";
+    
+    if (!(JSON.parse(localStorage.getItem("student" + rowIndex)) == undefined))
     {
-        toCheck = JSON.parse(localStorage.getItem("check" + spot));
+        tName = JSON.parse(localStorage.getItem("student" + rowIndex));
+        //alert(tName);
+    }
+
+    if (!(JSON.parse(localStorage.getItem(tName + "" + 2)) == undefined))
+    {
+        toCheck = JSON.parse(localStorage.getItem(tName + "" + 2));
         //alert(toCheck);
     }
 
@@ -85,13 +146,14 @@ function cellFormatter2(cell, row, rowIndex) {
             <input
                 type="checkbox"
                 checked
+                onClick= {() => saveCheck(2, toCheck, tName)}
                 />
         );
     }
     
 
   return (
-    <input type="checkbox" onClick= {() => saveCheck(spot, toCheck)}/>
+    <input type="checkbox" onClick= {() => saveCheck(2, toCheck, tName)}/>
   );
 }
 
@@ -100,9 +162,17 @@ function cellFormatter3(cell, row, rowIndex) {
     var spot = rowIndex + "-" + 3;
     var toCheck = false;
 
-    if (!(JSON.parse(localStorage.getItem("check" + spot)) == undefined))
+    var tName = "";
+    
+    if (!(JSON.parse(localStorage.getItem("student" + rowIndex)) == undefined))
     {
-        toCheck = JSON.parse(localStorage.getItem("check" + spot));
+        tName = JSON.parse(localStorage.getItem("student" + rowIndex));
+        //alert(tName);
+    }
+
+    if (!(JSON.parse(localStorage.getItem(tName + "" + 3)) == undefined))
+    {
+        toCheck = JSON.parse(localStorage.getItem(tName + "" + 3));
         //alert(toCheck);
     }
 
@@ -112,13 +182,14 @@ function cellFormatter3(cell, row, rowIndex) {
             <input
                 type="checkbox"
                 checked
+                onClick= {() => saveCheck(3, toCheck, tName)}
                 />
         );
     }
     
 
   return (
-    <input type="checkbox" onClick= {() => saveCheck(spot, toCheck)}/>
+    <input type="checkbox" onClick= {() => saveCheck(3, toCheck, tName)}/>
   );
 }
 
@@ -127,9 +198,17 @@ function cellFormatter4(cell, row, rowIndex) {
     var spot = rowIndex + "-" + 4;
     var toCheck = false;
 
-    if (!(JSON.parse(localStorage.getItem("check" + spot)) == undefined))
+    var tName = "";
+    
+    if (!(JSON.parse(localStorage.getItem("student" + rowIndex)) == undefined))
     {
-        toCheck = JSON.parse(localStorage.getItem("check" + spot));
+        tName = JSON.parse(localStorage.getItem("student" + rowIndex));
+        //alert(tName);
+    }
+
+    if (!(JSON.parse(localStorage.getItem(tName + "" + 4)) == undefined))
+    {
+        toCheck = JSON.parse(localStorage.getItem(tName + "" + 4));
         //alert(toCheck);
     }
 
@@ -139,13 +218,14 @@ function cellFormatter4(cell, row, rowIndex) {
             <input
                 type="checkbox"
                 checked
+                onClick= {() => saveCheck(4, toCheck, tName)}
                 />
         );
     }
     
 
   return (
-    <input type="checkbox" onClick= {() => saveCheck(spot, toCheck)}/>
+    <input type="checkbox" onClick= {() => saveCheck(4, toCheck, tName)}/>
   );
 }
 
@@ -153,10 +233,17 @@ function cellFormatter5(cell, row, rowIndex) {
   
     var spot = rowIndex + "-" + 5;
     var toCheck = false;
-
-    if (!(JSON.parse(localStorage.getItem("check" + spot)) == undefined))
+    var tName = "";
+    
+    if (!(JSON.parse(localStorage.getItem("student" + rowIndex)) == undefined))
     {
-        toCheck = JSON.parse(localStorage.getItem("check" + spot));
+        tName = JSON.parse(localStorage.getItem("student" + rowIndex));
+        //alert(tName);
+    }
+
+    if (!(JSON.parse(localStorage.getItem(tName + "" + 5)) == undefined))
+    {
+        toCheck = JSON.parse(localStorage.getItem(tName + "" + 5));
         //alert(toCheck);
     }
 
@@ -166,13 +253,14 @@ function cellFormatter5(cell, row, rowIndex) {
             <input
                 type="checkbox"
                 checked
+                onClick= {() => saveCheck(5, toCheck, tName)}
                 />
         );
     }
     
 
   return (
-    <input type="checkbox" onClick= {() => saveCheck(spot, toCheck)}/>
+    <input type="checkbox" onClick= {() => saveCheck(5, toCheck, tName)}/>
   );
 }
 
@@ -194,6 +282,7 @@ class NStudentTable extends Component{
         };
 
         this.togglePopup = this.togglePopup.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
     }
 
     togglePopup()
@@ -205,11 +294,17 @@ class NStudentTable extends Component{
         );
     }
 
+    handleSearch()
+    {
+      searching = true;
+      alert('searching');
+    }
+
     render() {
         return(
             <ToolkitProvider className= "myTable"
                 bootstrap4 = {true}
-                keyField="Name"
+                keyField="name"
                 data= {this.state.data}
                 
                 columns={ columns }
@@ -219,7 +314,7 @@ class NStudentTable extends Component{
                     props => (
                     <div className = "problem">
                         <div className = "options">
-                        <SearchBar { ...props.searchProps } />
+                        <SearchBar { ...props.searchProps } onClick= {this.handleSearch.bind(this)} />
                         <button className= "hide">&nbsp;</button>
                         </div>
 
@@ -237,7 +332,12 @@ class NStudentTable extends Component{
                         }
                         <button>Read Excel</button>
                         
+
                     </div>
+                        
+                    
+                        
+                    
                     )
                 }
             </ToolkitProvider>
