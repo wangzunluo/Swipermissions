@@ -45,27 +45,18 @@ class Machine extends Component {
     var oldlog = "";
     var oldCheck = false;
     var oldUser = "";
-    var isGreen = true;
 
-    if (!(JSON.parse(localStorage.getItem('log' + this.props.id) == undefined)))
+    if (!(this.props.logs === undefined))
     {
-      oldlog = JSON.parse(localStorage.getItem('log' + this.props.id));
+      oldlog = this.props.logs
     }
 
-    if (!(JSON.parse(localStorage.getItem('checkedOut' + this.props.id) == undefined)))
-    {
-      oldCheck = JSON.parse(localStorage.getItem('checkedOut' + this.props.id));
-    }
+    oldCheck = this.props.available === 't' ? true : false
 
-    if (!(JSON.parse(localStorage.getItem('user' + this.props.id) == undefined)))
-    {
-      oldUser = JSON.parse(localStorage.getItem('user' + this.props.id));
-    }
+    
+    oldUser = this.props.user
+    
 
-    if (!(JSON.parse(localStorage.getItem('green' + this.props.id) == undefined)))
-    {
-      isGreen = JSON.parse(localStorage.getItem('green' + this.props.id));
-    }
 
     this.state = {
       showPopup: false, 
@@ -74,9 +65,9 @@ class Machine extends Component {
       checkedOut: oldCheck,
       user: oldUser,
       id: this.props.id,
-      green: isGreen,
     };
 
+    console.log(this.state)
     this.togglePopup = this.togglePopup.bind(this);
     this.showLogs = this.showLogs.bind(this);
 
@@ -118,7 +109,7 @@ class Machine extends Component {
       <tr className="Machine">
         <td className= "MName">{this.props.name}</td>
         <td className = "KeyBox">
-        <ChangingButton green = {this.state.green} id= {this.props.id} triggerParentUpdate= {this.togglePopup.bind(this)}></ChangingButton>
+        <ChangingButton green = {this.state.checkedOut} id= {this.props.id} triggerParentUpdate= {this.togglePopup.bind(this)}></ChangingButton>
         {this.state.showPopup ? 
           <Checkout 
             id = {this.state.id}
@@ -189,10 +180,12 @@ class Checkout extends Machine {
       localStorage.setItem(itemName, JSON.stringify(newLog));
       localStorage.removeItem("user" + this.props.id);
       
+      //still need to update database here
+      
       localStorage.setItem("green" + this.props.id, false);
         this.setState(
           {
-            user: ""
+            user: "none"
           }
         );
     }
@@ -260,6 +253,7 @@ class Checkin extends Machine {
     }
     localStorage.setItem(itemName, JSON.stringify(newLog));
     
+    //still needs to update database 
     localStorage.setItem("green" + this.props.id, true);
 
   }
