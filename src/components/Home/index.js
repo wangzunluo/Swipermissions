@@ -1,5 +1,5 @@
 import React from 'react'
-import MachineTable from './components/MachineTable';
+import { MTable } from './components/MachineTable';
 import { StudentTable } from './components/StudentTable';
 
 import './index.css';
@@ -22,7 +22,7 @@ const HomePage = () => (
             </div>
 
             <div className = "MachineTable">
-            <MachineTable></MachineTable>
+            <MTable/>
             </div>
 
         </div>

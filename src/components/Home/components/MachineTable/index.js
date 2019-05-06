@@ -1,9 +1,43 @@
 import React, { Component } from 'react';
 import Machine from '../Machine'
 import './index.css'
+import { compose } from 'recompose';
+import { withRouter } from 'react-router-dom';
 
+import { withFirebase } from '../../../Firebase';
 
 class MachineTable extends Component {
+
+    constructor(props) {
+      super(props)
+
+      this.state = {
+        data: []
+      }
+
+      this.props.firebase.readMachinesOnce().then((value) => {
+        if (value) this.parseData(value)
+      })
+
+      
+    }
+
+    parseData(data) {
+      let parsed = []
+      let counter = 1
+      data.forEach((row) => {
+        parsed.push({name: row.name, id: counter})
+        counter++
+      })
+      this.setState({data: parsed})
+    }
+
+    renderMachines() {
+      return this.state.data.map((machine) => {
+        return <Machine name={machine.name} id={machine.id}/>
+      })
+    }
+
     render() {
         return (
         <table className="MachineTable">
@@ -16,13 +50,7 @@ class MachineTable extends Component {
 
             <th className = "AS">Add Users</th>
           </tr>
-          <Machine name="Mill" id= "1"></Machine>
-          <Machine name="Mill" id= "2"></Machine>
-          <Machine name="Lathe" id = "3"></Machine>
-          <Machine name="Lathe"  id = "4"></Machine>
-          <Machine name="CNC Mill" id = "5"></Machine>
-          <Machine name="CNC Router"  id = "6"></Machine>
-          <Machine name="CNC Plasma"  id = "7"></Machine>
+          {this.renderMachines()}
 
         </tbody>
       </table>
@@ -30,4 +58,10 @@ class MachineTable extends Component {
     }
 }
 
-export default MachineTable
+
+const MTable = compose(
+  withRouter,
+  withFirebase,
+)(MachineTable);
+
+export { MTable };

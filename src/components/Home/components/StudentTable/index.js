@@ -202,12 +202,10 @@ class NStudentTable extends Component{
         };
 
         this.togglePopup = this.togglePopup.bind(this);
-    }
 
-    componentDidMount() {
-      this.props.firebase.readOnce().then((value) => {
-        if (value) this.parseData(value)
-      })
+        this.props.firebase.readStudentsOnce().then((value) => {
+          if (value) this.parseData(value)
+        })
     }
 
     parseData = (data) => {
