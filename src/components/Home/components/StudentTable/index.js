@@ -122,25 +122,28 @@ class NStudentTable extends Component {
     }
 
     cellFormatter1 = (cell, row, rowIndex) => {
-        return (<input type="checkbox" checked={this.state.data[rowIndex].mill} onClick={() => this.handleCheck(row, "mill")}/>);
+      let trueRow = this.state.data.indexOf(row)
+      return (<input type="checkbox" checked={this.state.data[trueRow].mill} onClick={() => this.handleCheck(row, "mill")}/>);
     }
 
-    
-
     cellFormatter2 = (cell, row, rowIndex) => {
-      return (<input type="checkbox" checked={this.state.data[rowIndex].lathe} onClick={() => this.handleCheck(row, "lathe")}/>);
+      let trueRow = this.state.data.indexOf(row)
+      return (<input type="checkbox" checked={this.state.data[trueRow].lathe} onClick={() => this.handleCheck(row, "lathe")}/>);
     }
 
     cellFormatter3 = (cell, row, rowIndex) => {
-      return (<input type="checkbox" checked={this.state.data[rowIndex].cncmill} onClick={() => this.handleCheck(row, "cncmill")}/>);
+      let trueRow = this.state.data.indexOf(row)
+      return (<input type="checkbox" checked={this.state.data[trueRow].cncmill} onClick={() => this.handleCheck(row, "cncmill")}/>);
     }
 
     cellFormatter4 = (cell, row, rowIndex) => {
-      return (<input type="checkbox" checked={this.state.data[rowIndex].cncrouter} onClick={() => this.handleCheck(row, "cncrouter")}/>);
+      let trueRow = this.state.data.indexOf(row)
+      return (<input type="checkbox" checked={this.state.data[trueRow].cncrouter} onClick={() => this.handleCheck(row, "cncrouter")}/>);
     }
 
     cellFormatter5 = (cell, row, rowIndex) => {
-      return (<input type="checkbox" checked={this.state.data[rowIndex].cncplasma} onClick={() => this.handleCheck(row, "cncplasma")}/>);
+      let trueRow = this.state.data.indexOf(row)
+      return (<input type="checkbox" checked={this.state.data[trueRow].cncplasma} onClick={() => this.handleCheck(row, "cncplasma")}/>);
     }
 
     render() {
