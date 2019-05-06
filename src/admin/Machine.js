@@ -68,6 +68,7 @@ class Machine extends Component {
     this.state = {
       showPopup: false, 
       showCheckin: false,
+      showLogs: false,
       logs: oldlog,
       checkedOut: oldCheck,
       user: oldUser,
@@ -77,9 +78,12 @@ class Machine extends Component {
 
     this.togglePopup = this.togglePopup.bind(this);
     this.showLogs = this.showLogs.bind(this);
+    this.closeLogs = this.closeLogs.bind(this);
 
     this.closePopup = this.closePopup.bind(this);
   }
+
+  
 
   closePopup()
   {
@@ -99,7 +103,6 @@ class Machine extends Component {
     }
     else
     {
-      //alert("Checking in")
       this.setState({
         showCheckin: !this.state.showCheckin
       });
@@ -107,12 +110,18 @@ class Machine extends Component {
   }
 
   showLogs() {
-    alert(this.state.logs)
+
+    this.props.triggerParentUpdate();
+  }
+
+  closeLogs()
+  {
+
   }
 
   render()
   {
-      return (
+      return (  
       <tr className="Machine">
         <td className= "MName">{this.props.name}</td>
         <td className = "KeyBox">
@@ -136,9 +145,25 @@ class Machine extends Component {
           : null
         }
         </td>
-        <td className = "InfoBox">
-        <div className = 'Fourth'>        
-          <Fab size="small" color = "primary" className ='Info' onClick={this.showLogs.bind(this)} >
+        
+        <td className = "InfoBox"  
+        onClick={this.showLogs.bind(this)} 
+        
+        >
+        
+        <div className = 'Fourth'> 
+
+        {/*
+          this.state.showLogs ? 
+          <Editor
+            logs = {this.state.logs}
+
+            closePopup={this.closeLogs.bind(this)}
+          />
+          : null
+        */}   
+          <Fab size="small" color = "primary" className ='Info'>
+          
           <InfoIcon className = 'Icon2' />
           </Fab>
         </div>
@@ -152,6 +177,7 @@ class Machine extends Component {
         </td>
         
       </tr>
+      
     )
   }
 }
