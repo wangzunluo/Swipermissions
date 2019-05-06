@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './index.css';
-import ChangingButton from "../ChangingButton"
+import ChangingButton from "../ChangingButton";
+import {StudentTable} from "../StudentTable";
+import {MiniStudentTable} from "../MiniStudentTable";
 
 import Fab from '@material-ui/core/Fab';
 
@@ -136,13 +138,17 @@ class Machine extends Component {
           </Fab>
         </div>
         </td>
+        {/*
         <td className = "AddBox">
+        
         <div className = 'Third'>        
           <Fab size="small" color = "primary" className ='Add'>
           <AddIcon/>
           </Fab>
         </div>
         </td>
+        */
+        }
         
       </tr>
     )
@@ -198,24 +204,14 @@ class Checkout extends Machine {
 
   render() {
     return (
-      <div className='Login'>
-        <div className='Login_inner1'>
-          <div className='Close_bar'>
-            <button className ='closer' onClick={this.props.closePopup}>X</button>
-          </div>
-          
-          <div className ='SignIn'>
-            <form className='SignForm' onSubmit={this.handleSubmit}>
-            Check out to?
-              <label className='UserBar'>              
-                <input type="text" value={this.state.user} onChange={this.handleChangeUser} />
-              </label>
-              <input type="submit" value="Submit" />
-            </form>
-          </div>
+      <div className = "StudentPop">
 
+        <div className = "PopInner">
+        <div className='Close_bar2'>
+          <button className ='closer2' onClick={this.props.closePopup}>X</button>
         </div>
- 
+        <MiniStudentTable></MiniStudentTable>
+        </div>
       </div>
     );
   }
