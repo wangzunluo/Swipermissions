@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import './index.css';
-import ChangingButton from "../ChangingButton";
-import {StudentTable} from "../StudentTable";
-import {MiniStudentTable} from "../MiniStudentTable";
-
+import ChangingButton from "../ChangingButton"
 import Fab from '@material-ui/core/Fab';
-
 import AddIcon from '@material-ui/icons/Add';
 import InfoIcon from '@material-ui/icons/Info'
 
@@ -47,34 +43,47 @@ class Machine extends Component {
     var oldlog = "";
     var oldCheck = false;
     var oldUser = "";
+    var isGreen = true;
 
-    if (!(this.props.logs === undefined))
+    if (!(JSON.parse(localStorage.getItem('log' + this.props.id) == undefined)))
     {
-      oldlog = this.props.logs
+      oldlog = JSON.parse(localStorage.getItem('log' + this.props.id));
     }
 
-    oldCheck = this.props.available === 't' ? true : false
+    if (!(JSON.parse(localStorage.getItem('checkedOut' + this.props.id) == undefined)))
+    {
+      oldCheck = JSON.parse(localStorage.getItem('checkedOut' + this.props.id));
+    }
 
-    
-    oldUser = this.props.user
-    
+    if (!(JSON.parse(localStorage.getItem('user' + this.props.id) == undefined)))
+    {
+      oldUser = JSON.parse(localStorage.getItem('user' + this.props.id));
+    }
 
+    if (!(JSON.parse(localStorage.getItem('green' + this.props.id) == undefined)))
+    {
+      isGreen = JSON.parse(localStorage.getItem('green' + this.props.id));
+    }
 
     this.state = {
       showPopup: false, 
       showCheckin: false,
+      showLogs: false,
       logs: oldlog,
       checkedOut: oldCheck,
       user: oldUser,
       id: this.props.id,
+      green: isGreen,
     };
 
-    console.log(this.state)
     this.togglePopup = this.togglePopup.bind(this);
     this.showLogs = this.showLogs.bind(this);
+    this.closeLogs = this.closeLogs.bind(this);
 
     this.closePopup = this.closePopup.bind(this);
   }
+
+  
 
   closePopup()
   {
@@ -94,7 +103,6 @@ class Machine extends Component {
     }
     else
     {
-      //alert("Checking in")
       this.setState({
         showCheckin: !this.state.showCheckin
       });
@@ -102,16 +110,22 @@ class Machine extends Component {
   }
 
   showLogs() {
-    alert(this.state.logs)
+
+    this.props.triggerParentUpdate();
+  }
+
+  closeLogs()
+  {
+
   }
 
   render()
   {
-      return (
+      return (  
       <tr className="Machine">
         <td className= "MName">{this.props.name}</td>
         <td className = "KeyBox">
-        <ChangingButton green = {this.state.checkedOut} id= {this.props.id} triggerParentUpdate= {this.togglePopup.bind(this)}></ChangingButton>
+        <ChangingButton green = {this.state.green} id= {this.props.id} triggerParentUpdate= {this.togglePopup.bind(this)}></ChangingButton>
         {this.state.showPopup ? 
           <Checkout 
             id = {this.state.id}
@@ -131,26 +145,32 @@ class Machine extends Component {
           : null
         }
         </td>
-        <td className = "InfoBox">
-        <div className = 'Fourth'>        
-          <Fab size="small" color = "primary" className ='Info' onClick={this.showLogs.bind(this)} >
+        
+        <td className = "InfoBox"  
+        onClick={this.showLogs.bind(this)} 
+        
+        >
+        
+        <div className = 'Fourth'> 
+
+        {/*
+          this.state.showLogs ? 
+          <Editor
+            logs = {this.state.logs}
+
+            closePopup={this.closeLogs.bind(this)}
+          />
+          : null
+        */}   
+          <Fab size="small" color = "primary" className ='Info'>
+          
           <InfoIcon className = 'Icon2' />
           </Fab>
         </div>
         </td>
-        {/*
-        <td className = "AddBox">
-        
-        <div className = 'Third'>        
-          <Fab size="small" color = "primary" className ='Add'>
-          <AddIcon/>
-          </Fab>
-        </div>
-        </td>
-        */
-        }
         
       </tr>
+      
     )
   }
 }
@@ -186,12 +206,10 @@ class Checkout extends Machine {
       localStorage.setItem(itemName, JSON.stringify(newLog));
       localStorage.removeItem("user" + this.props.id);
       
-      //still need to update database here
-      
       localStorage.setItem("green" + this.props.id, false);
         this.setState(
           {
-            user: "none"
+            user: ""
           }
         );
     }
@@ -204,14 +222,24 @@ class Checkout extends Machine {
 
   render() {
     return (
-      <div className = "StudentPop">
+      <div className='Login'>
+        <div className='Login_inner1'>
+          <div className='Close_bar'>
+            <button className ='closer' onClick={this.props.closePopup}>X</button>
+          </div>
+          
+          <div className ='SignIn'>
+            <form className='SignForm' onSubmit={this.handleSubmit}>
+            Check out to?
+              <label className='UserBar'>              
+                <input type="text" value={this.state.user} onChange={this.handleChangeUser} />
+              </label>
+              <input type="submit" value="Submit" />
+            </form>
+          </div>
 
-        <div className = "PopInner">
-        <div className='Close_bar2'>
-          <button className ='closer2' onClick={this.props.closePopup}>X</button>
         </div>
-        <MiniStudentTable></MiniStudentTable>
-        </div>
+ 
       </div>
     );
   }
@@ -249,7 +277,6 @@ class Checkin extends Machine {
     }
     localStorage.setItem(itemName, JSON.stringify(newLog));
     
-    //still needs to update database 
     localStorage.setItem("green" + this.props.id, true);
 
   }

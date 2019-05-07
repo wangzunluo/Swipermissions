@@ -1,67 +1,67 @@
 .Machine{
-    background-color: white;
-    border:0;
-    border-collapse: collapse;
+  background-color: white;
+  border:0;
+  border-collapse: collapse;
 }
 
 .MName{
-    margin-top: 0px;
-    border: 2px solid black;
+  margin-top: 0px;
+  border: 2px solid black;
 }
+
+
 
 .Key{
-    width:100%;
-    height: 100%;
-    margin: 0;
-    border: 0;
-    font-size: 34px;
+  width:100%;
+  height: 100%;
+  margin: 0;
+  border: 0;
+  font-size: 34px;
 }
-
 .MuiButtonBase-root-140
 {
-    color: skyblue;
+  color: skyblue;
 }
 
 .Add{
-    background-color: skyblue;
-    color: skyblue;
+  background-color: skyblue;
+  color: skyblue;
 }
 
 .AddBox
 {
-    border: 2px solid black;
-    background-color: white;
+  border: 2px solid black;
+  background-color: white;
 }
 
 .Third{
-    display: flex;
-    width: 100%;
-    height: 100%;
-    border-collapse: collapse;
-    justify-content: center;
-    background-color: white;
-    color: rgb(46, 125, 156);
-    
+  display: flex;
+  width: 100%;
+  height: 100%;
+  border-collapse: collapse;
+  justify-content: center;
+  background-color: white;
+  color: rgb(46, 125, 156);
+  
 }
 
 .Fourth
 {
-    display: flex;
-    justify-content: center;
-    
+  display: flex;
+  justify-content: center;
+  
 }
 
 .InfoBox{
-    border: 2px solid black;
+  border: 2px solid black;
 }
 
 .KeyBox{
-    border: 2px solid black;
-    height: 100%;
+  border: 2px solid black;
+  height: 100%;
 }
 
-.StudentPop
-{
+.Login {
   position: fixed;
   width: 100%;
   height: 100%;
@@ -70,37 +70,31 @@
   right: 0;
   bottom: 0;
   margin: auto;
+  z-index: 10000;
   background-color: rgba(0,0,0, 0.5);
-  justify-content: center;
-  justify-items: center;
-  justify-self: center;
+
+}
+.Login_inner1 {
+  position: absolute;
+  left: 40%;
+  right: 40%;
+  top: 30%;
+  bottom: 50%;
+  z-index: 1000;
+
+  background: lightgray;
+  color: red;
+  border: solid black 2px;
 }
 
-.PopInner
-{
-    position: absolute;
-    justify-content: center;
-    justify-items: center;
-    justify-self: center;
-    margin: auto;
-    min-width: 280px;
-    z-index: 1000000;
-    left: 40%;
-    right: auto;
-    top: 10%;
-    bottom: auto;
-    background-color: rgb(152, 156, 161);
-    border: 1px solid black;
-}
-
-.Close_bar2
+.Close_bar
 {
   width: 100%;
-  float: right;
+  float: top;
   display: block;
 }
 
-.closer2
+.closer
 {
   float: top;
   border: solid red 1px;
@@ -108,73 +102,28 @@
   margin: 0px;
 }
 
-.Login {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    justify-content: center;
-    background-color: rgba(0,0,0, 0.5);
-  
-  }
-  .Login_inner1 {
-    position: absolute;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-bottom: 10px;
-    width: auto;
-    height: auto;
-    left: 50%;
-    top: 30%;
-    
-  
-    background-color: rgb(199, 199, 199);
-    color: red;
-    border: solid black 1px;
-  }
-  
-  .Close_bar
-  {
-    width: 100%;
-    float: top;
-    display: block;
-  }
-  
-  .closer
-  {
-    float: top;
-    border: solid red 1px;
-    color: red;
-    margin: 0px;
-  }
-  
-  .SignIn
-  {
-    color: black;
-    margin-top: 30px;
-    font-size: 1em;
-    font-weight: normal;
-  }
-  
-  .SignForm
-  {
-    margin-top: 40px;
-    font-weight: normal;
-  }
-  
-  .UserBar
-  {
-    display: block;
-    margin-bottom: 20px;
-  
-  }
-  
-  .PasswordBar
-  {
-    margin-bottom: 20px;
-    display: block;
-  }
+.SignIn
+{
+  color: black;
+  margin-top: 30px;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.SignForm
+{
+  margin-top: 40px;
+}
+
+.UserBar
+{
+  display: block;
+  margin-bottom: 20px;
+
+}
+
+.PasswordBar
+{
+  margin-bottom: 20px;
+  display: block;
+}
