@@ -146,6 +146,10 @@ class NStudentTable extends Component {
       return (<input type="checkbox" checked={this.state.data[trueRow].cncplasma} onClick={() => this.handleCheck(row, "cncplasma")}/>);
     }
 
+    addStudent = (FirstName, LastName, Email, num) => {
+        this.props.firebase.addUser(FirstName, LastName, Email, num)
+    }
+
     render() {
         return (
             <ToolkitProvider
@@ -170,6 +174,8 @@ class NStudentTable extends Component {
                         {this.state.showPopup
                             ? <AddPrompt
                                     data={this.state.data}
+                                    add={this.addStudent}
+                                    total={this.state.data.length+1}
                                     closePopup={this
                                     .togglePopup
                                     .bind(this)}/>
@@ -184,18 +190,22 @@ class NStudentTable extends Component {
     }
 }
 
-class AddPrompt extends NStudentTable {
+class AddPrompt extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: this.props.data,
-            newName: '',
+            firstName: '',
+            lastName: '',
             newContact: '',
             //id: this.props.id,
         };
 
-        this.handleChangeUser = this
-            .handleChangeUser
+        this.handleChangeFirst = this
+            .handleChangeFirst
+            .bind(this);
+        
+        this.handleChangeLast = this
+            .handleChangeLast
             .bind(this);
         this.handleChangeContact = this
             .handleChangeContact
@@ -206,8 +216,12 @@ class AddPrompt extends NStudentTable {
             .bind(this);
     }
 
-    handleChangeUser(event) {
-        this.setState({newName: event.target.value});
+    handleChangeFirst(event) {
+        this.setState({firstName: event.target.value});
+    }
+
+    handleChangeLast(event) {
+        this.setState({lastName: event.target.value});
     }
 
     handleChangeContact(event) {
@@ -215,19 +229,7 @@ class AddPrompt extends NStudentTable {
     }
 
     handleSubmit(event) {
-        if (this.state.newName !== '') {
-            var newArray = this
-                .state
-                .data
-                .slice();
-            newArray.push({name: this.state.newName, email: this.state.newContact});
-            this.setState({data: newArray});
-            localStorage.setItem('data', JSON.stringify(newArray));
-
-        } else if (this.state.newName == '') {
-            alert("Please enter a user");
-            event.preventDefault();
-        }
+        this.props.add(this.state.firstName, this.state.lastName, this.state.newContact, this.props.total)
     }
 
     render() {
@@ -241,12 +243,17 @@ class AddPrompt extends NStudentTable {
                     <div className='SignIn'>
                         Add a User
                         <form className='SignForm' onSubmit={this.handleSubmit}>
-                            New User's Name:
+                            New User's First Name:
                             <label className='UserBar'>
 
-                                <input type="text" value={this.state.newName} onChange={this.handleChangeUser}/>
+                                <input type="text" value={this.state.newName} onChange={this.handleChangeFirst}/>
                             </label>
-                            Contact Info:
+                            New User's Last Name:
+                            <label className='UserBar'>
+
+                                <input type="text" value={this.state.newName} onChange={this.handleChangeLast}/>
+                            </label>
+                            Email:
                             <label className='PasswordBar'>
 
                                 <input

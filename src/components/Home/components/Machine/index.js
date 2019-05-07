@@ -43,7 +43,7 @@ class Machine extends Component {
   constructor(props) {
     super(props);
     //localStorage.clear();
-
+    this.changingbutton = React.createRef()
     var oldlog = "";
     var oldCheck = false;
     var oldUser = "";
@@ -78,6 +78,7 @@ class Machine extends Component {
 
   closePopup()
   {
+    console.log("ASDFASD")
     this.setState(
       {
         showCheckin: false,
@@ -99,10 +100,17 @@ class Machine extends Component {
         showCheckin: !this.state.showCheckin
       });
     }
+    this.setState({
+      checkedOut: !this.state.checkedOut
+    }) 
   }
 
   showLogs() {
     alert(this.state.logs)
+  }
+
+  myCallBack = () => {
+    this.changingbutton.current.update()
   }
 
   render()
@@ -111,22 +119,28 @@ class Machine extends Component {
       <tr className="Machine">
         <td className= "MName">{this.props.name}</td>
         <td className = "KeyBox">
-        <ChangingButton green = {this.state.checkedOut} id= {this.props.id} triggerParentUpdate= {this.togglePopup.bind(this)}></ChangingButton>
+        <ChangingButton ref={this.changingbutton} change={this.myCallBack} green = {this.state.checkedOut} id= {this.props.id} triggerParentUpdate= {this.togglePopup.bind(this) } ></ChangingButton>
+
+        
         {this.state.showPopup ? 
           <Checkout 
             id = {this.state.id}
+            name = {this.props.name}
             logs = {this.state.logs}
             checkedOut = {this.state.checkedOut}
             closePopup={this.togglePopup.bind(this)}
+            myCallBack={this.myCallBack}
           />
           : null
         }
         {this.state.showCheckin ? 
           <Checkin 
             id = {this.state.id}
+            name = {this.props.name}
             logs = {this.state.logs}
             checkedOut = {this.state.checkedOut}
             closePopup={this.closePopup.bind(this)}
+            myCallBack={this.myCallBack}
           />
           : null
         }
@@ -203,16 +217,11 @@ class Checkout extends Machine {
   }
 
   render() {
+    console.log(this)
     return (
-      <div className = "StudentPop">
 
-        <div className = "PopInner">
-        <div className='Close_bar2'>
-          <button className ='closer2' onClick={this.props.closePopup}>X</button>
-        </div>
-        <MiniStudentTable></MiniStudentTable>
-        </div>
-      </div>
+        <MiniStudentTable machineID={this.props.id} machineName={this.props.name} machineLogs={this.props.logs} closeFlip={this.props.closePopup} checkIn={true} change={this.props.myCallBack}></MiniStudentTable>
+
     );
   }
 }
@@ -257,21 +266,12 @@ class Checkin extends Machine {
   render() {
     return (
       <div className='Login'>
-        <div className='Login_inner1'>
-          <div className='Close_bar'>
+        <div className='PopInner'>
+          <div className='Close_bar2'>
             <button className ='closer' onClick={this.props.closePopup}>X</button>
           </div>
           
-          <div className ='SignIn'>
-            <form className='SignForm' onSubmit={this.handleSubmit}>
-            Check in time?
-              <label className='UserBar'>
-                
-                <input type="text" value={this.state.time} onChange={this.handleChangeTime} />
-              </label>
-              <input type="submit" value="Submit" />
-            </form>
-          </div>
+          <MiniStudentTable machineID={this.props.id} machineName={this.props.name} machineLogs={this.props.logs} closeFlip={this.props.closePopup} change={this.myCallBack}></MiniStudentTable>
 
         </div>
  

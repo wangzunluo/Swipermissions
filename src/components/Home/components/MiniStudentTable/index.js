@@ -20,8 +20,16 @@ function saveCheck(spot, toCheck) {
 
 class NStudentTable2 extends Component {
     constructor(props) {
-        super(props);
 
+
+        super(props);
+        if (this.props.checkIn) {
+            this.props.firebase.checkinMachine(this.props.machineID, this.props.machineName, this.props.machineLogs).then(
+                this.dismiss()
+                
+            )
+        }
+        console.log(this.props.machineName)
         this.columns = [
             {
                 dataField: 'FirstName',
@@ -54,6 +62,7 @@ class NStudentTable2 extends Component {
             .bind(this);
 
         this
+        //query here change
             .props
             .firebase
             .readStudentsOnce()
@@ -93,53 +102,39 @@ class NStudentTable2 extends Component {
         });
     }
 
-    handleCheck = (row, machine) => {
-      let fbID = this.state.data.indexOf(row)+1
-      let updatedUser = { ...row }
+    handleCheck = (machineID, row, name, logs) => {
+    
+      if (logs === undefined) logs = "tbd"
+
+      let user = row.FirstName + " " + row.LastName
+      this.props.firebase.checkoutMachine(machineID, user, name, logs).then(
+          this.dismiss()
+      )
       
- 
-      updatedUser[machine] = !updatedUser[machine]
-      console.log(fbID)
-      console.log(updatedUser)
-      let newData = this.state.data.slice()
-      newData[fbID-1] = updatedUser
-      this.setState({data: newData})
-      this.props.firebase.updateUser(updatedUser, fbID)
+      
+    }
+
+    dismiss = () => {
+        this.props.closeFlip()
+        this.props.change()
     }
 
     cellFormatterA = (cell, row, rowIndex) => 
     {
         return (
-            <button className= "Adder">Checkout</button>
+            <button className= "Adder" onClick={() => this.handleCheck(this.props.machineID, row, this.props.machineName, this.props.machineLogs)}>Checkout</button>
         )
     }
 
-    cellFormatter1 = (cell, row, rowIndex) => {
-      let trueRow = this.state.data.indexOf(row)
-      return (<input type="checkbox" checked={this.state.data[trueRow].mill} onClick={() => this.handleCheck(row, "mill")}/>);
-    }
-
-    cellFormatter2 = (cell, row, rowIndex) => {
-      let trueRow = this.state.data.indexOf(row)
-      return (<input type="checkbox" checked={this.state.data[trueRow].lathe} onClick={() => this.handleCheck(row, "lathe")}/>);
-    }
-
-    cellFormatter3 = (cell, row, rowIndex) => {
-      let trueRow = this.state.data.indexOf(row)
-      return (<input type="checkbox" checked={this.state.data[trueRow].cncmill} onClick={() => this.handleCheck(row, "cncmill")}/>);
-    }
-
-    cellFormatter4 = (cell, row, rowIndex) => {
-      let trueRow = this.state.data.indexOf(row)
-      return (<input type="checkbox" checked={this.state.data[trueRow].cncrouter} onClick={() => this.handleCheck(row, "cncrouter")}/>);
-    }
-
-    cellFormatter5 = (cell, row, rowIndex) => {
-      let trueRow = this.state.data.indexOf(row)
-      return (<input type="checkbox" checked={this.state.data[trueRow].cncplasma} onClick={() => this.handleCheck(row, "cncplasma")}/>);
-    }
-
     render() {
+        if (this.props.checkIn) {
+            this.props.firebase.checkinMachine(this.props.machineID, this.props.machineName, this.props.machineLogs).then(
+                this.dismiss()   
+            )
+            
+            return null
+        }
+        
         return (
             <ToolkitProvider
                 className="myTable"
@@ -154,7 +149,7 @@ class NStudentTable2 extends Component {
                             <SearchBar { ...props.searchProps }/>
                             <button className="hide">&nbsp;</button>
                         </div>
-
+                        <form/>
                         <BootstrapTable bootstrap4={true} { ...props.baseProps }/>
                         
                     </div>
