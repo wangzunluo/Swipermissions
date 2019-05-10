@@ -1,5 +1,5 @@
 import React from 'react';
-import { HomePage } from '../Home';
+import { LandingPage } from '../Landing';
 import {
     BrowserRouter as Router,
     Route,
@@ -9,7 +9,7 @@ import * as ROUTES from '../../constants/routes';
 
 const App = () => (
   <Router>
-    <Route path={ROUTES.HOME} component={HomePage} />
+    <Route path={ROUTES.LANDING} component={LandingPage} />
   </Router>
 );
 

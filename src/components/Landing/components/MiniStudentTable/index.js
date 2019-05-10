@@ -12,10 +12,34 @@ import {withFirebase} from '../../../Firebase';
 
 const {SearchBar} = Search;
 
-function saveCheck(spot, toCheck) {
-    //var spot = row + "-" + column;
-    localStorage.setItem("check" + spot, JSON.stringify(!toCheck));
-    //alert("reached" + spot);
+function findTime()
+{
+  var today = new Date();
+  var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  var sign = "P.M.";
+  var hour = today.getHours();
+  var minute = today.getMinutes();
+
+  if (today.getHours() < 12)
+  {
+    sign = "A.M.";
+  }
+
+  if (hour > 12)
+  {
+    hour = hour - 12;
+  }
+  else if (hour == 0)
+  {
+    hour = 12;
+  }
+
+  if (minute < 10)
+  {
+    minute = "0" + minute;
+  }
+
+  return date + " " + hour + ":" + minute + " " + sign;
 }
 
 class NStudentTable2 extends Component {
@@ -23,6 +47,7 @@ class NStudentTable2 extends Component {
 
 
         super(props);
+        console.log(this.props.machineLogs)
         if (this.props.checkIn) {
             this.props.firebase.checkinMachine(this.props.machineID, this.props.machineName, this.props.machineLogs).then(
                 this.dismiss()
@@ -70,6 +95,7 @@ class NStudentTable2 extends Component {
                 if (value) 
                     this.parseData(value)
             })
+
     }
 
     parseData = (data) => {
@@ -103,20 +129,32 @@ class NStudentTable2 extends Component {
     }
 
     handleCheck = (machineID, row, name, logs) => {
-    
-      if (logs === undefined) logs = "tbd"
-
+      let id
+      let log
       let user = row.FirstName + " " + row.LastName
-      this.props.firebase.checkoutMachine(machineID, user, name, logs).then(
-          this.dismiss()
+      if (logs === "") {
+         id = 1
+         log = {user: user, type: "check-out", time: findTime()}
+      }else{
+          console.log(logs)
+         log = logs.slice()
+         id = log.length
+         log = {user: user, type: "check-out", time: findTime()}
+      }
+
+      
+       
+      console.log(log)
+      this.props.firebase.checkoutMachine(machineID, user, name, log, id).then(
+          this.dismiss(user, log)
       )
       
       
     }
 
-    dismiss = () => {
-        this.props.closeFlip()
-        this.props.change()
+    dismiss = (name, log) => {
+        this.props.closeFlip(log)
+        this.props.change(name)
     }
 
     cellFormatterA = (cell, row, rowIndex) => 
@@ -127,13 +165,7 @@ class NStudentTable2 extends Component {
     }
 
     render() {
-        if (this.props.checkIn) {
-            this.props.firebase.checkinMachine(this.props.machineID, this.props.machineName, this.props.machineLogs).then(
-                this.dismiss()   
-            )
-            
-            return null
-        }
+        
         
         return (
             <ToolkitProvider

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Machine from '../Machine'
+import { MyMachine } from '../Machine'
 import './index.css'
 import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
@@ -25,16 +25,18 @@ class MachineTable extends Component {
     parseData(data) {
       let parsed = []
       let counter = 1
+      console.log(data)
       data.forEach((row) => {
-        parsed.push({name: row.name, id: counter, available: row.available, logs: row.logs})
+        parsed.push({name: row.name, id: counter, user: row.user, available: row.available, logs: row.logs})
         counter++
       })
       this.setState({data: parsed})
     }
 
     renderMachines() {
+
       return this.state.data.map((machine) => {
-        return <Machine name={machine.name} id={machine.id} available={machine.available} logs={machine.logs}/>
+        return <MyMachine name={machine.name} id={machine.id} user={machine.user} available={machine.available} logs={machine.logs}/>
       })
     }
 

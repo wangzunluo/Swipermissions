@@ -10,7 +10,7 @@ function clearStorage()
 }
 
 
-const HomePage = () => (
+const LandingPage = () => (
     <div className = "Wrapper">
         <div className = "Banner">
         Admin View
@@ -29,5 +29,5 @@ const HomePage = () => (
     </div>
 )
 
-export { HomePage }
+export { LandingPage }
 
