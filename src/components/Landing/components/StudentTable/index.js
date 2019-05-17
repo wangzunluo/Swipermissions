@@ -47,6 +47,9 @@ class NStudentTable extends Component {
             }, {
                 text: 'CNC Plasma',
                 formatter: this.cellFormatter5
+            }, {
+                text: 'Remove',
+                formatter: this.cellFormatter6
             }
         ];
 
@@ -117,8 +120,10 @@ class NStudentTable extends Component {
       console.log(updatedUser)
       let newData = this.state.data.slice()
       newData[fbID-1] = updatedUser
-      this.setState({data: newData})
-      this.props.firebase.updateUser(updatedUser, fbID)
+      this.props.firebase.updateUser(updatedUser, fbID).then(
+        this.setState({data: newData})
+
+      )
     }
 
     cellFormatter1 = (cell, row, rowIndex) => {
@@ -144,6 +149,19 @@ class NStudentTable extends Component {
     cellFormatter5 = (cell, row, rowIndex) => {
       let trueRow = this.state.data.indexOf(row)
       return (<input type="checkbox" checked={this.state.data[trueRow].cncplasma} onClick={() => this.handleCheck(row, "cncplasma")}/>);
+    }
+
+    cellFormatter6 = (cell, row, rowIndex) => {
+      return (<button className="Deleter" onClick={() => this.deleteStudent(row)}>Delete</button>);
+    }
+
+    deleteStudent = (row) => {
+        let fbID = this.state.data.indexOf(row)+1
+        let newData = this.state.data.slice()
+        newData.splice(fbID-1, 1)
+        this.props.firebase.removeUser(fbID).then(
+            this.setState({data: newData})
+        )
     }
 
     addStudent = (FirstName, LastName, Email, num) => {

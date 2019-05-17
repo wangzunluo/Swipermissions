@@ -14,6 +14,12 @@ th.sortable{
     max-height: 0px !important;
 }
 
+.Deleter
+{
+  margin: 0;
+  width: 100%;
+}
+
 .options
 {
     display: inline-block;
