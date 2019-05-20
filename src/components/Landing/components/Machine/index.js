@@ -10,7 +10,9 @@ import {withFirebase} from '../../../Firebase';
 import Fab from '@material-ui/core/Fab';
 
 import AddIcon from '@material-ui/icons/Add';
-import InfoIcon from '@material-ui/icons/Info'
+import InfoIcon from '@material-ui/icons/Info';
+import ErrorIcon from '@material-ui/icons/Error';
+import AddCommentIcon from '@material-ui/icons/AddComment';
 
 function findTime()
 {
@@ -201,9 +203,9 @@ class Machine extends Component {
         }
         </td>
         <td className = "InfoBox" onClick={this.toggleLogs}>
-        <div className = 'Fourth'>        
+        <div className = 'Third'>        
           <Fab size="small" color = "primary" className ='Info' >
-          <InfoIcon className = 'Icon2' />
+          <AddCommentIcon className = 'Icon2' />
           </Fab>
         </div>
         {this.state.showLogs ? 
@@ -213,6 +215,20 @@ class Machine extends Component {
           />
           :null
         }
+        </td>
+        <td className = "InfoBox2" onClick={this.toggleLogs}>
+          <div className = 'Fourth'>        
+            <Fab size="small" color = "primary" className ='Info' >
+            <ErrorIcon className = 'Icon3' />
+            </Fab>
+          </div>
+          {/*this.state.showLogs ? 
+            <Editor
+              logs={this.state.logs}
+              closePopup={this.closeLogs}
+            />
+            :null
+          */}
         </td>
         {/*
         <td className = "AddBox">
