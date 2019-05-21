@@ -12,12 +12,6 @@ import {withFirebase} from '../../../Firebase';
 
 const {SearchBar} = Search;
 
-function saveCheck(spot, toCheck) {
-    //var spot = row + "-" + column;
-    localStorage.setItem("check" + spot, JSON.stringify(!toCheck));
-    //alert("reached" + spot);
-}
-
 class NStudentTable extends Component {
     constructor(props) {
         super(props);
@@ -79,10 +73,6 @@ class NStudentTable extends Component {
                     this.parseData(value)
             })
 
-        this.props.firebase.readTestOnce().then((value => {
-            console.log(value)
-            console.log(Array.isArray(value))
-        }))
     }
 
     parseData = (data) => {
@@ -98,7 +88,8 @@ class NStudentTable extends Component {
                         lathe: data[i].lathe, 
                         cncmill: data[i].cncmill,
                         cncrouter: data[i].cncrouter,
-                        cncplasma: data[i].cncplasma
+                        cncplasma: data[i].cncplasma,
+                        id: i
                     }
                     for (var att in data[i]) {
                         if (data[i][att] === undefined) {
@@ -110,7 +101,16 @@ class NStudentTable extends Component {
             this.setState({data: data})
         }
         else {
-
+            let parsed = []
+            for(let key in data) {
+                let x = {
+                    ...data[key],
+                    id: key
+                }
+                parsed.push(x)
+            }
+            this.setState({data: parsed})
+            console.log(data)
         }
         
     }
@@ -173,7 +173,7 @@ class NStudentTable extends Component {
         console.log(fbID)
         let newData = this.state.data.slice()
         newData.splice(fbID, 1)
-        this.props.firebase.removeUser(fbID).then(
+        this.props.firebase.removeUser(row.id).then(
             this.setState({data: newData})
         )
     }
@@ -207,7 +207,6 @@ class NStudentTable extends Component {
                             ? <AddPrompt
                                     data={this.state.data}
                                     add={this.addStudent}
-                                    total={this.state.data.length+1}
                                     closePopup={this
                                     .togglePopup
                                     .bind(this)}/>
@@ -269,7 +268,7 @@ class AddPrompt extends Component {
     }
 
     handleSubmit(event) {
-        this.props.add(this.state.firstName, this.state.lastName, this.state.newContact, this.props.total)
+        this.props.add(this.state.firstName, this.state.lastName, this.state.newContact, this.state.id)
     }
 
     render() {
