@@ -78,29 +78,41 @@ class NStudentTable extends Component {
                 if (value) 
                     this.parseData(value)
             })
+
+        this.props.firebase.readTestOnce().then((value => {
+            console.log(value)
+            console.log(Array.isArray(value))
+        }))
     }
 
     parseData = (data) => {
-        let parsed = []
 
-        data.forEach((row) => {
-            let x = {
-              ...row, 
-              mill: row.mill, 
-              lathe: row.lathe, 
-              cncmill: row.cncmill,
-              cncrouter: row.cncrouter,
-              cncplasma: row.cncplasma
-            }
-            for (var att in x) {
-              if (x[att] === undefined) {
-                x[att] = false
-              }
-            }
-            parsed.push(x)
-        })
+        console.log(data)
 
-        this.setState({data: parsed})
+        if(Array.isArray(data)) {
+            for(let i=0; i<data.length; i++){
+                if (data[i]) {
+                    data[i] = {
+                        ...data[i],
+                        mill: data[i].mill, 
+                        lathe: data[i].lathe, 
+                        cncmill: data[i].cncmill,
+                        cncrouter: data[i].cncrouter,
+                        cncplasma: data[i].cncplasma
+                    }
+                    for (var att in data[i]) {
+                        if (data[i][att] === undefined) {
+                          data[i][att] = false
+                        }
+                    }
+                }
+            }
+            this.setState({data: data})
+        }
+        else {
+
+        }
+        
     }
 
     togglePopup()
@@ -156,9 +168,11 @@ class NStudentTable extends Component {
     }
 
     deleteStudent = (row) => {
-        let fbID = this.state.data.indexOf(row)+1
+        console.log(this.state.data)
+        let fbID = this.state.data.indexOf(row)
+        console.log(fbID)
         let newData = this.state.data.slice()
-        newData.splice(fbID-1, 1)
+        newData.splice(fbID, 1)
         this.props.firebase.removeUser(fbID).then(
             this.setState({data: newData})
         )
@@ -214,6 +228,7 @@ class AddPrompt extends Component {
         this.state = {
             firstName: '',
             lastName: '',
+            id: '',
             newContact: '',
             //id: this.props.id,
         };
@@ -224,6 +239,9 @@ class AddPrompt extends Component {
         
         this.handleChangeLast = this
             .handleChangeLast
+            .bind(this);
+        this.handleChangeID = this
+            .handleChangeID
             .bind(this);
         this.handleChangeContact = this
             .handleChangeContact
@@ -240,6 +258,10 @@ class AddPrompt extends Component {
 
     handleChangeLast(event) {
         this.setState({lastName: event.target.value});
+    }
+
+    handleChangeID(event) {
+        this.setState({id: event.target.value});
     }
 
     handleChangeContact(event) {
@@ -264,14 +286,19 @@ class AddPrompt extends Component {
                             New User's First Name:
                             <label className='UserBar'>
 
-                                <input type="text" value={this.state.newName} onChange={this.handleChangeFirst}/>
+                                <input type="text" value={this.state.firstName} onChange={this.handleChangeFirst}/>
                             </label>
                             New User's Last Name:
                             <label className='UserBar'>
 
-                                <input type="text" value={this.state.newName} onChange={this.handleChangeLast}/>
+                                <input type="text" value={this.state.lastName} onChange={this.handleChangeLast}/>
                             </label>
-                            Email:
+                            New User's Student ID:
+                            <label className='UserBar'>
+
+                                <input type="text" value={this.state.id} onChange={this.handleChangeID}/>
+                            </label>
+                            New User's Email:
                             <label className='PasswordBar'>
 
                                 <input
