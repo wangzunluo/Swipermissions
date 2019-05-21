@@ -50,10 +50,7 @@ class NStudentTable extends Component {
         //localStorage.clear();
         var oldData = [];
 
-        if (!(JSON.parse(localStorage.getItem('data')) === undefined)) {
-            console.log(oldData)
-            oldData = JSON.parse(localStorage.getItem('data'));
-        }
+        
 
         this.state = {
             data: oldData,
@@ -72,6 +69,7 @@ class NStudentTable extends Component {
                 if (value) 
                     this.parseData(value)
             })
+
 
     }
 
