@@ -33,19 +33,19 @@ class NStudentTable extends Component {
                 dataField: 'Email',
                 text: 'Contact'
             }, {
-                text: 'Mill',
+                text: ' Mill ',
                 formatter: this.cellFormatter1
             }, {
-                text: 'Lathe',
+                text: ' Lathe ',
                 formatter: this.cellFormatter2
             }, {
-                text: 'CNC Mill',
+                text: 'CNC ' + '\n' + ' Mill ',
                 formatter: this.cellFormatter3
             }, {
-                text: 'CNC Router',
+                text: 'CNC\n Router ',
                 formatter: this.cellFormatter4
             }, {
-                text: 'CNC Plasma',
+                text: 'CNC\n Plasma ',
                 formatter: this.cellFormatter5
             }, {
                 text: 'Remove',

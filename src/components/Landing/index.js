@@ -17,12 +17,13 @@ const LandingPage = () => (
         <button onClick= {clearStorage}>Clear Storage</button>
         </div>
         <div className = "Top">
-            <div className = "StudentTable">
-                <StudentTable></StudentTable>
-            </div>
 
+
+            <div className = "StudentTable">
+                <MTable/>
+            </div>
             <div className = "MachineTable">
-            <MTable/>
+                <StudentTable></StudentTable>
             </div>
 
         </div>

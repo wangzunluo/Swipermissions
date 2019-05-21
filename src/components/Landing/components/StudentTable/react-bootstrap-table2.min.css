@@ -19,6 +19,10 @@ th.sortable{
   margin: 0;
   width: 100%;
 }
+.sr-only
+{
+  font-size: 0px;
+}
 
 .options
 {
@@ -28,13 +32,20 @@ th.sortable{
 
 .table-bordered thead th{
     color: white;
-    background-color: darkred;
+    background-color: #841617;
     border: 2px solid black;
 
 }
 .table-bordered thead tr{
     border: 2px solid black;
+    background-color: #841617;
+    white-space: pre;
+}
 
+.table-bordered thead td{
+  
+  background-color: #841617;
+  white-space: pre;
 }
 
 .table-bordered tbody td{

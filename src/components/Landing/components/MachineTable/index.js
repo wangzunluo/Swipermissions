@@ -50,7 +50,7 @@ class MachineTable extends Component {
             <th className = "Keys">Checkout/in</th>
             <th className = "KeyHistory">History</th>
 
-            {/*<th className = "AS">Add Users</th>*/}
+            <th className = "AS">Special Logs</th>
           </tr>
           {this.renderMachines()}
 
