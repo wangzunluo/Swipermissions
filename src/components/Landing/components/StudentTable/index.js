@@ -33,7 +33,7 @@ class NStudentTable extends Component {
                 text: ' Lathe ',
                 formatter: this.cellFormatter2
             }, {
-                text: 'CNC ' + '\n' + ' Mill ',
+                text: 'CNC\n Mill ',
                 formatter: this.cellFormatter3
             }, {
                 text: 'CNC\n Router ',
@@ -50,7 +50,7 @@ class NStudentTable extends Component {
         //localStorage.clear();
         var oldData = [];
 
-        if (!(JSON.parse(localStorage.getItem('data')) == undefined)) {
+        if (!(JSON.parse(localStorage.getItem('data')) === undefined)) {
             console.log(oldData)
             oldData = JSON.parse(localStorage.getItem('data'));
         }

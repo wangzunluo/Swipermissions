@@ -29,7 +29,7 @@ function findTime()
   {
     hour = hour - 12;
   }
-  else if (hour == 0)
+  else if (hour === 0)
   {
     hour = 12;
   }
@@ -72,7 +72,7 @@ class NStudentTable2 extends Component {
         //localStorage.clear();
         var oldData = [];
 
-        if (!(JSON.parse(localStorage.getItem('data')) == undefined)) {
+        if (!(JSON.parse(localStorage.getItem('data')) === undefined)) {
             console.log(oldData)
             oldData = JSON.parse(localStorage.getItem('data'));
         }

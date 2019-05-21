@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './index.css';
 import ChangingButton from "../ChangingButton";
-import {StudentTable} from "../StudentTable";
 import {MiniStudentTable} from "../MiniStudentTable";
 import {compose} from 'recompose';
 import {withRouter} from 'react-router-dom';
@@ -9,8 +8,6 @@ import {withFirebase} from '../../../Firebase';
 
 import Fab from '@material-ui/core/Fab';
 
-import AddIcon from '@material-ui/icons/Add';
-import InfoIcon from '@material-ui/icons/Info';
 import ErrorIcon from '@material-ui/icons/Error';
 import AddCommentIcon from '@material-ui/icons/AddComment';
 
@@ -31,7 +28,7 @@ function findTime()
   {
     hour = hour - 12;
   }
-  else if (hour == 0)
+  else if (hour === 0)
   {
     hour = 12;
   }
