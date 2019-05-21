@@ -27,21 +27,27 @@ class NStudentTable extends Component {
                 dataField: 'Email',
                 text: 'Contact'
             }, {
+                dataField: 'Mill',
                 text: ' Mill ',
                 formatter: this.cellFormatter1
             }, {
+                dataField: 'Lathe',
                 text: ' Lathe ',
                 formatter: this.cellFormatter2
             }, {
+                dataField: 'CNCMill',
                 text: 'CNC\n Mill ',
                 formatter: this.cellFormatter3
             }, {
+                dataField: 'CNCRouter',
                 text: 'CNC\n Router ',
                 formatter: this.cellFormatter4
             }, {
+                dataField: 'CNCPlasma',
                 text: 'CNC\n Plasma ',
                 formatter: this.cellFormatter5
             }, {
+                dataField: 'Delete',
                 text: 'Remove',
                 formatter: this.cellFormatter6
             }
@@ -121,7 +127,7 @@ class NStudentTable extends Component {
     }
 
     handleCheck = (row, machine) => {
-      let fbID = this.state.data.indexOf(row)+1
+      let fbID = this.state.data.indexOf(row)
       let updatedUser = { ...row }
       
  
@@ -129,8 +135,8 @@ class NStudentTable extends Component {
       console.log(fbID)
       console.log(updatedUser)
       let newData = this.state.data.slice()
-      newData[fbID-1] = updatedUser
-      this.props.firebase.updateUser(updatedUser, fbID).then(
+      newData[fbID] = updatedUser
+      this.props.firebase.updateUser(updatedUser, row.id).then(
         this.setState({data: newData})
 
       )
@@ -138,27 +144,27 @@ class NStudentTable extends Component {
 
     cellFormatter1 = (cell, row, rowIndex) => {
       let trueRow = this.state.data.indexOf(row)
-      return (<input type="checkbox" checked={this.state.data[trueRow].mill} onClick={() => this.handleCheck(row, "mill")}/>);
+      return (<input type="checkbox" checked={this.state.data[trueRow].mill} onChange={() => this.handleCheck(row, "mill")}/>);
     }
 
     cellFormatter2 = (cell, row, rowIndex) => {
       let trueRow = this.state.data.indexOf(row)
-      return (<input type="checkbox" checked={this.state.data[trueRow].lathe} onClick={() => this.handleCheck(row, "lathe")}/>);
+      return (<input type="checkbox" checked={this.state.data[trueRow].lathe} onChange={() => this.handleCheck(row, "lathe")}/>);
     }
 
     cellFormatter3 = (cell, row, rowIndex) => {
       let trueRow = this.state.data.indexOf(row)
-      return (<input type="checkbox" checked={this.state.data[trueRow].cncmill} onClick={() => this.handleCheck(row, "cncmill")}/>);
+      return (<input type="checkbox" checked={this.state.data[trueRow].cncmill} onChange={() => this.handleCheck(row, "cncmill")}/>);
     }
 
     cellFormatter4 = (cell, row, rowIndex) => {
       let trueRow = this.state.data.indexOf(row)
-      return (<input type="checkbox" checked={this.state.data[trueRow].cncrouter} onClick={() => this.handleCheck(row, "cncrouter")}/>);
+      return (<input type="checkbox" checked={this.state.data[trueRow].cncrouter} onChange={() => this.handleCheck(row, "cncrouter")}/>);
     }
 
     cellFormatter5 = (cell, row, rowIndex) => {
       let trueRow = this.state.data.indexOf(row)
-      return (<input type="checkbox" checked={this.state.data[trueRow].cncplasma} onClick={() => this.handleCheck(row, "cncplasma")}/>);
+      return (<input type="checkbox" checked={this.state.data[trueRow].cncplasma} onChange={() => this.handleCheck(row, "cncplasma")}/>);
     }
 
     cellFormatter6 = (cell, row, rowIndex) => {
@@ -185,7 +191,7 @@ class NStudentTable extends Component {
             <ToolkitProvider
                 className="myTable"
                 bootstrap4={true}
-                keyField="Name"
+                keyField="Email"
                 data={this.state.data}
                 columns={this.columns}
                 search>

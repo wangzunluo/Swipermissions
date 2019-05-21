@@ -182,7 +182,7 @@ class Machine extends Component {
   render()
   {
       return (
-      <tr className="Machine">
+      <tr className="Machine" key={this.props.key}>
         <td className= "MName">{this.props.name}</td>
         <td className = "KeyBox">
         <ChangingButton handleLogs={this.handleSubmit} change={update => this.childUpdate = update} green = {!this.state.checkedOut} id= {this.props.id} triggerParentUpdate= {this.togglePopup } name={this.state.user}></ChangingButton>

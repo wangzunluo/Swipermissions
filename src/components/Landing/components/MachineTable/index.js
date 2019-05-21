@@ -35,8 +35,8 @@ class MachineTable extends Component {
 
     renderMachines() {
 
-      return this.state.data.map((machine) => {
-        return <MyMachine name={machine.name} id={machine.id} user={machine.user} available={machine.available} logs={machine.logs}/>
+      return this.state.data.map((machine, i) => {
+        return <MyMachine key={i} name={machine.name} id={machine.id} user={machine.user} available={machine.available} logs={machine.logs}/>
       })
     }
 
