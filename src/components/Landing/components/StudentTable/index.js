@@ -278,14 +278,14 @@ class AddPrompt extends Component {
     render() {
         return (
             <div className='Login'>
-                <div className='Login_inner'>
+                <div className='Add_inner'>
                     <div className='Close_bar'>
                         <button className='closer' onClick={this.props.closePopup}>X</button>
                     </div>
 
-                    <div className='SignIn'>
+                    <div className='AddUser'>
                         Add a User
-                        <form className='SignForm' onSubmit={this.handleSubmit}>
+                        <form className='AddForm' onSubmit={this.handleSubmit}>
                             New User's First Name:
                             <label className='UserBar'>
 

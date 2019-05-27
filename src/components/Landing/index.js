@@ -14,7 +14,6 @@ const LandingPage = () => (
     <div className = "Wrapper">
         <div className = "Banner">
         Admin View
-        <button onClick= {clearStorage}>Clear Storage</button>
         </div>
         <div className = "Top">
 

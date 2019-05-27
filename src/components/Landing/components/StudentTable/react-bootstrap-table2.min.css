@@ -110,7 +110,7 @@ th.sortable{
     background-color: rgba(0,0,0, 0.5);
   
   }
-  .Login_inner {
+  .Add_inner {
     position: absolute;
     left: 40%;
     right: 40%;
@@ -138,17 +138,21 @@ th.sortable{
     margin: 0px;
   }
   
-  .SignIn
+  .AddUser
   {
+    justify-content: center;
+    text-align: center;
     color: black;
     margin-top: 30px;
-    font-size: 1em;
+    font-size: 15px;
     font-weight: bold;
   }
   
-  .SignForm
+  .AddForm
   {
-    margin-top: 40px;
+
+    margin-top: 20px;
+    font-weight: normal;
   }
   
   .UserBar
