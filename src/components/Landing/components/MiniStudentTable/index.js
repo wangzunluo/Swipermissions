@@ -69,16 +69,8 @@ class NStudentTable2 extends Component {
             }
         ];
 
-        //localStorage.clear();
-        var oldData = [];
-
-        if (!(JSON.parse(localStorage.getItem('data')) === undefined)) {
-            console.log(oldData)
-            oldData = JSON.parse(localStorage.getItem('data'));
-        }
-
         this.state = {
-            data: oldData,
+            data: [],
             showPopup: false
         };
 
@@ -99,26 +91,43 @@ class NStudentTable2 extends Component {
     }
 
     parseData = (data) => {
-        let parsed = []
 
-        data.forEach((row) => {
-            let x = {
-              ...row, 
-              mill: row.mill, 
-              lathe: row.lathe, 
-              cncmill: row.cncmill,
-              cncrouter: row.cncrouter,
-              cncplasma: row.cncplasma
-            }
-            for (var att in x) {
-              if (x[att] === undefined) {
-                x[att] = false
-              }
-            }
-            parsed.push(x)
-        })
+        console.log(data)
 
-        this.setState({data: parsed})
+        if(Array.isArray(data)) {
+            for(let i=0; i<data.length; i++){
+                if (data[i]) {
+                    data[i] = {
+                        ...data[i],
+                        mill: data[i].mill, 
+                        lathe: data[i].lathe, 
+                        cncmill: data[i].cncmill,
+                        cncrouter: data[i].cncrouter,
+                        cncplasma: data[i].cncplasma,
+                        id: i
+                    }
+                    for (var att in data[i]) {
+                        if (data[i][att] === undefined) {
+                          data[i][att] = false
+                        }
+                    }
+                }
+            }
+            this.setState({data: data})
+        }
+        else {
+            let parsed = []
+            for(let key in data) {
+                let x = {
+                    ...data[key],
+                    id: key
+                }
+                parsed.push(x)
+            }
+            this.setState({data: parsed})
+            console.log(data)
+        }
+        
     }
 
     togglePopup()
@@ -171,7 +180,7 @@ class NStudentTable2 extends Component {
             <ToolkitProvider
                 className="myTable"
                 bootstrap4={true}
-                keyField="Name"
+                keyField="Email"
                 data={this.state.data}
                 columns={this.columns}
                 search>

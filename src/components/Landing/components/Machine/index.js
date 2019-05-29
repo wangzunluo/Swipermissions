@@ -81,8 +81,20 @@ class Machine extends Component {
     this.closePopup = this.closePopup.bind(this);
   }
 
+  xclose = () =>
+  {
+    this.setState(
+      {
+        showCheckIn: false,
+        showCheckOut: false,
+        checkedOut: false
+      }
+    );
+  }
+
   closePopup(outlog)
   {
+    console.log(this.state)
     if(outlog) {
       if (this.state.logs === "") {
         console.log("maybe")
@@ -101,9 +113,12 @@ class Machine extends Component {
         showCheckOut: false
       }
     );
+    console.log(this.state)
+
   }
   
   togglePopup = (name, outlog) => {
+    console.log(this.state)
     console.log("maybe")
 
     if (!this.state.checkedOut)
@@ -145,6 +160,8 @@ class Machine extends Component {
     this.setState({
       checkedOut: !this.state.checkedOut
     }) 
+    console.log(this.state)
+
    
   }
 
@@ -194,6 +211,7 @@ class Machine extends Component {
             logs = {this.state.logs}
             checkedOut = {this.state.checkedOut}
             closePopup={this.closePopup.bind(this)}
+            xclose={this.xclose}
             myCallBack={this.childUpdate}
           />
           :null
@@ -284,7 +302,7 @@ class Checkin extends Machine {
       <div className='Login'>
         <div className='PopInner'>
           <div className='Close_bar2'>
-            <button className ='closer' onClick={this.props.closePopup}>X</button>
+            <button className ='closer' onClick={this.props.xclose}>X</button>
           </div>
           
           <MiniStudentTable machineID={this.props.id} machineName={this.props.name} machineLogs={this.props.logs} closeFlip={this.props.closePopup} change={this.props.myCallBack} ></MiniStudentTable>

@@ -4,12 +4,6 @@ import { StudentTable } from './components/StudentTable';
 
 import './index.css';
 
-function clearStorage()
-{
-    localStorage.clear();
-}
-
-
 const LandingPage = () => (
     <div className = "Wrapper">
         <div className = "Banner">
