@@ -12,47 +12,41 @@ import {withFirebase} from '../../../Firebase';
 
 const {SearchBar} = Search;
 
-function findTime()
-{
-  var today = new Date();
-  var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-  var sign = "P.M.";
-  var hour = today.getHours();
-  var minute = today.getMinutes();
+function findTime() {
+    var today = new Date();
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    var sign = "P.M.";
+    var hour = today.getHours();
+    var minute = today.getMinutes();
 
-  if (today.getHours() < 12)
-  {
-    sign = "A.M.";
-  }
+    if (today.getHours() < 12) {
+        sign = "A.M.";
+    }
 
-  if (hour > 12)
-  {
-    hour = hour - 12;
-  }
-  else if (hour === 0)
-  {
-    hour = 12;
-  }
+    if (hour > 12) {
+        hour = hour - 12;
+    } else if (hour === 0) {
+        hour = 12;
+    }
 
-  if (minute < 10)
-  {
-    minute = "0" + minute;
-  }
+    if (minute < 10) {
+        minute = "0" + minute;
+    }
 
-  return date + " " + hour + ":" + minute + " " + sign;
+    return date + " " + hour + ":" + minute + " " + sign;
 }
 
 class NStudentTable2 extends Component {
     constructor(props) {
 
-
         super(props);
         console.log(this.props.machineLogs)
         if (this.props.checkIn) {
-            this.props.firebase.checkinMachine(this.props.machineID, this.props.machineName, this.props.machineLogs).then(
-                this.dismiss()
-                
-            )
+            this
+                .props
+                .firebase
+                .checkinMachine(this.props.machineID, this.props.machineName, this.props.machineLogs)
+                .then(this.dismiss())
         }
         console.log(this.props.machineName)
         this.columns = [
@@ -94,13 +88,13 @@ class NStudentTable2 extends Component {
 
         console.log(data)
 
-        if(Array.isArray(data)) {
-            for(let i=0; i<data.length; i++){
+        if (Array.isArray(data)) {
+            for (let i = 0; i < data.length; i++) {
                 if (data[i]) {
                     data[i] = {
                         ...data[i],
-                        mill: data[i].mill, 
-                        lathe: data[i].lathe, 
+                        mill: data[i].mill,
+                        lathe: data[i].lathe,
                         cncmill: data[i].cncmill,
                         cncrouter: data[i].cncrouter,
                         cncplasma: data[i].cncplasma,
@@ -108,16 +102,15 @@ class NStudentTable2 extends Component {
                     }
                     for (var att in data[i]) {
                         if (data[i][att] === undefined) {
-                          data[i][att] = false
+                            data[i][att] = false
                         }
                     }
                 }
             }
             this.setState({data: data})
-        }
-        else {
+        } else {
             let parsed = []
-            for(let key in data) {
+            for (let key in data) {
                 let x = {
                     ...data[key],
                     id: key
@@ -127,7 +120,7 @@ class NStudentTable2 extends Component {
             this.setState({data: parsed})
             console.log(data)
         }
-        
+
     }
 
     togglePopup()
@@ -138,44 +131,55 @@ class NStudentTable2 extends Component {
     }
 
     handleCheck = (machineID, row, name, logs) => {
-      let id
-      let log
-      let user = row.FirstName + " " + row.LastName
-      if (logs === "") {
-         id = 1
-         log = {user: user, type: "check-out", time: findTime()}
-      }else{
-          console.log(logs)
-         log = logs.slice()
-         id = log.length
-         log = {user: user, type: "check-out", time: findTime()}
-      }
+        let id
+        let log
+        let user = row.FirstName + " " + row.LastName
+        if (logs === "") {
+            id = 1
+            log = {
+                user: user,
+                type: "check-out",
+                time: findTime()
+            }
+        } else {
+            console.log(logs)
+            log = logs.slice()
+            id = log.length
+            log = {
+                user: user,
+                type: "check-out",
+                time: findTime()
+            }
+        }
 
-      
-       
-      console.log(log)
-      this.props.firebase.checkoutMachine(machineID, user, name, log, id).then(
-          this.dismiss(user, log)
-      )
-      
-      
+        console.log(log)
+        this
+            .props
+            .firebase
+            .checkoutMachine(machineID, user, name, log, id)
+            .then(this.dismiss(user, log))
+
     }
 
     dismiss = (name, log) => {
-        this.props.closeFlip(log)
-        this.props.change(name)
+        this
+            .props
+            .closeFlip(log)
+        this
+            .props
+            .change(name)
     }
 
-    cellFormatterA = (cell, row, rowIndex) => 
-    {
+    cellFormatterA = (cell, row, rowIndex) => {
         return (
-            <button className= "Adder" onClick={() => this.handleCheck(this.props.machineID, row, this.props.machineName, this.props.machineLogs)}>Checkout</button>
+            <button
+                className="Adder"
+                onClick={() => this.handleCheck(this.props.machineID, row, this.props.machineName, this.props.machineLogs)}>Checkout</button>
         )
     }
 
     render() {
-        
-        
+
         return (
             <ToolkitProvider
                 className="myTable"
@@ -192,7 +196,7 @@ class NStudentTable2 extends Component {
                         </div>
                         <form/>
                         <BootstrapTable bootstrap4={true} { ...props.baseProps }/>
-                        
+
                     </div>
                 )
 }
@@ -200,8 +204,6 @@ class NStudentTable2 extends Component {
         )
     }
 }
-
-
 
 const MiniStudentTable = compose(withRouter, withFirebase,)(NStudentTable2);
 

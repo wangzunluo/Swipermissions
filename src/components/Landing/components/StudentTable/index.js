@@ -56,8 +56,6 @@ class NStudentTable extends Component {
         //localStorage.clear();
         var oldData = [];
 
-        
-
         this.state = {
             data: oldData,
             showPopup: false
@@ -76,20 +74,19 @@ class NStudentTable extends Component {
                     this.parseData(value)
             })
 
-
     }
 
     parseData = (data) => {
 
         console.log(data)
 
-        if(Array.isArray(data)) {
-            for(let i=0; i<data.length; i++){
+        if (Array.isArray(data)) {
+            for (let i = 0; i < data.length; i++) {
                 if (data[i]) {
                     data[i] = {
                         ...data[i],
-                        mill: data[i].mill, 
-                        lathe: data[i].lathe, 
+                        mill: data[i].mill,
+                        lathe: data[i].lathe,
                         cncmill: data[i].cncmill,
                         cncrouter: data[i].cncrouter,
                         cncplasma: data[i].cncplasma,
@@ -97,16 +94,15 @@ class NStudentTable extends Component {
                     }
                     for (var att in data[i]) {
                         if (data[i][att] === undefined) {
-                          data[i][att] = false
+                            data[i][att] = false
                         }
                     }
                 }
             }
             this.setState({data: data})
-        }
-        else {
+        } else {
             let parsed = []
-            for(let key in data) {
+            for (let key in data) {
                 let x = {
                     ...data[key],
                     id: key
@@ -116,7 +112,7 @@ class NStudentTable extends Component {
             this.setState({data: parsed})
             console.log(data)
         }
-        
+
     }
 
     togglePopup()
@@ -127,63 +123,114 @@ class NStudentTable extends Component {
     }
 
     handleCheck = (row, machine) => {
-      let fbID = this.state.data.indexOf(row)
-      let updatedUser = { ...row }
-      
- 
-      updatedUser[machine] = !updatedUser[machine]
-      console.log(fbID)
-      console.log(updatedUser)
-      let newData = this.state.data.slice()
-      newData[fbID] = updatedUser
-      this.props.firebase.updateUser(updatedUser, row.id).then(
-        this.setState({data: newData})
+        let fbID = this
+            .state
+            .data
+            .indexOf(row)
+        let updatedUser = {
+            ...row
+        }
 
-      )
+        updatedUser[machine] = !updatedUser[machine]
+        console.log(fbID)
+        console.log(updatedUser)
+        let newData = this
+            .state
+            .data
+            .slice()
+        newData[fbID] = updatedUser
+        this
+            .props
+            .firebase
+            .updateUser(updatedUser, row.id)
+            .then(this.setState({data: newData}))
     }
 
     cellFormatter1 = (cell, row, rowIndex) => {
-      let trueRow = this.state.data.indexOf(row)
-      return (<input type="checkbox" checked={this.state.data[trueRow].mill} onChange={() => this.handleCheck(row, "mill")}/>);
+        let trueRow = this
+            .state
+            .data
+            .indexOf(row)
+        return (<input
+            type="checkbox"
+            checked={this.state.data[trueRow].mill}
+            onChange={() => this.handleCheck(row, "mill")}/>);
     }
 
     cellFormatter2 = (cell, row, rowIndex) => {
-      let trueRow = this.state.data.indexOf(row)
-      return (<input type="checkbox" checked={this.state.data[trueRow].lathe} onChange={() => this.handleCheck(row, "lathe")}/>);
+        let trueRow = this
+            .state
+            .data
+            .indexOf(row)
+        return (<input
+            type="checkbox"
+            checked={this.state.data[trueRow].lathe}
+            onChange={() => this.handleCheck(row, "lathe")}/>);
     }
 
     cellFormatter3 = (cell, row, rowIndex) => {
-      let trueRow = this.state.data.indexOf(row)
-      return (<input type="checkbox" checked={this.state.data[trueRow].cncmill} onChange={() => this.handleCheck(row, "cncmill")}/>);
+        let trueRow = this
+            .state
+            .data
+            .indexOf(row)
+        return (<input
+            type="checkbox"
+            checked={this.state.data[trueRow].cncmill}
+            onChange={() => this.handleCheck(row, "cncmill")}/>);
     }
 
     cellFormatter4 = (cell, row, rowIndex) => {
-      let trueRow = this.state.data.indexOf(row)
-      return (<input type="checkbox" checked={this.state.data[trueRow].cncrouter} onChange={() => this.handleCheck(row, "cncrouter")}/>);
+        let trueRow = this
+            .state
+            .data
+            .indexOf(row)
+        return (<input
+            type="checkbox"
+            checked={this.state.data[trueRow].cncrouter}
+            onChange={() => this.handleCheck(row, "cncrouter")}/>);
     }
 
     cellFormatter5 = (cell, row, rowIndex) => {
-      let trueRow = this.state.data.indexOf(row)
-      return (<input type="checkbox" checked={this.state.data[trueRow].cncplasma} onChange={() => this.handleCheck(row, "cncplasma")}/>);
+        let trueRow = this
+            .state
+            .data
+            .indexOf(row)
+        return (<input
+            type="checkbox"
+            checked={this.state.data[trueRow].cncplasma}
+            onChange={() => this.handleCheck(row, "cncplasma")}/>);
     }
 
     cellFormatter6 = (cell, row, rowIndex) => {
-      return (<button className="Deleter" onClick={() => this.deleteStudent(row)}>Delete</button>);
+        return (
+            <button className="Deleter" onClick={() => this.deleteStudent(row)}>Delete</button>
+        );
     }
 
     deleteStudent = (row) => {
         console.log(this.state.data)
-        let fbID = this.state.data.indexOf(row)
+        let fbID = this
+            .state
+            .data
+            .indexOf(row)
         console.log(fbID)
-        let newData = this.state.data.slice()
+        let newData = this
+            .state
+            .data
+            .slice()
         newData.splice(fbID, 1)
-        this.props.firebase.removeUser(row.id).then(
-            this.setState({data: newData})
-        )
+        this
+            .props
+            .firebase
+            .removeUser(row.id)
+            .then(this.setState({data: newData}))
     }
 
     addStudent = (FirstName, LastName, Email, num) => {
-        this.props.firebase.addUser(FirstName, LastName, Email, num)
+        this
+            .props
+            .firebase
+            .addUser(FirstName, LastName, Email, num)
     }
 
     render() {
@@ -239,7 +286,7 @@ class AddPrompt extends Component {
         this.handleChangeFirst = this
             .handleChangeFirst
             .bind(this);
-        
+
         this.handleChangeLast = this
             .handleChangeLast
             .bind(this);
@@ -272,7 +319,9 @@ class AddPrompt extends Component {
     }
 
     handleSubmit(event) {
-        this.props.add(this.state.firstName, this.state.lastName, this.state.newContact, this.state.id)
+        this
+            .props
+            .add(this.state.firstName, this.state.lastName, this.state.newContact, this.state.id)
     }
 
     render() {
@@ -289,12 +338,18 @@ class AddPrompt extends Component {
                             New User's First Name:
                             <label className='UserBar'>
 
-                                <input type="text" value={this.state.firstName} onChange={this.handleChangeFirst}/>
+                                <input
+                                    type="text"
+                                    value={this.state.firstName}
+                                    onChange={this.handleChangeFirst}/>
                             </label>
                             New User's Last Name:
                             <label className='UserBar'>
 
-                                <input type="text" value={this.state.lastName} onChange={this.handleChangeLast}/>
+                                <input
+                                    type="text"
+                                    value={this.state.lastName}
+                                    onChange={this.handleChangeLast}/>
                             </label>
                             New User's Student ID:
                             <label className='UserBar'>
