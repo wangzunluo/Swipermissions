@@ -27,7 +27,7 @@ class MachineTable extends Component {
       let counter = 1
       console.log(data)
       data.forEach((row) => {
-        parsed.push({name: row.name, id: counter, user: row.user, available: row.available, logs: row.logs})
+        parsed.push({name: row.name, id: counter, user: row.user, available: row.available, logs: row.logs, slogs: row.slogs})
         counter++
       })
       this.setState({data: parsed})
@@ -36,7 +36,7 @@ class MachineTable extends Component {
     renderMachines() {
 
       return this.state.data.map((machine, i) => {
-        return <MyMachine key={i} name={machine.name} id={machine.id} user={machine.user} available={machine.available} logs={machine.logs}/>
+        return <MyMachine key={i} name={machine.name} id={machine.id} user={machine.user} available={machine.available} logs={machine.logs} slogs={machine.slogs}/>
       })
     }
 

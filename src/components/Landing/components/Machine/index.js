@@ -48,10 +48,16 @@ class Machine extends Component {
     var oldlog = "";
     var oldCheck = false;
     var oldUser = "";
+    var slogs = '';
 
     if (!(this.props.logs === undefined))
     {
       oldlog = this.props.logs
+    }
+
+    if (!(this.props.slogs === undefined))
+    {
+      slogs = this.props.slogs
     }
 
     oldCheck = this.props.available === 't' ? false : true
@@ -68,7 +74,9 @@ class Machine extends Component {
       showCheckIn: false,
       showLogs: false,
       closeLogs: false,
+      currlogs: '',
       logs: oldlog,
+      slogs: slogs,
       checkedOut: oldCheck,
       user: oldUser,
       id: this.props.id,
@@ -76,7 +84,6 @@ class Machine extends Component {
 
     console.log(this.state)
     this.togglePopup = this.togglePopup.bind(this);
-    this.showLogs = this.showLogs.bind(this);
 
     this.closePopup = this.closePopup.bind(this);
   }
@@ -165,6 +172,13 @@ class Machine extends Component {
    
   }
 
+  handleSLogChange = (event) => {
+    this.setState({
+      slogs: event.target.value
+    })
+    event.preventDefault();
+  }
+
   handleSubmit = (name, type) =>
   {
     console.log(name)
@@ -183,16 +197,20 @@ class Machine extends Component {
 
   }
 
-  showLogs() {
-    alert(this.state.logs)
-  }
-
-  toggleLogs = () => {
+  toggleLogs = (id) => {
+    if (id) {
+      this.setState({currlogs: this.state.slogs})
+    }else{
+      this.setState({currlogs: this.state.logs})      
+    }
     if(!this.state.closeLogs)
       this.setState({showLogs:!this.state.showLogs, closeLogs: true})
   }
 
-  closeLogs = () => {
+  closeLogs = (isSlog) => {
+    if (isSlog) {
+      this.props.firebase.recordSLog(this.props.id, this.state.slogs)
+    }
     this.setState({showLogs:false, closeLogs: false})
   }
 
@@ -217,22 +235,23 @@ class Machine extends Component {
           :null
         }
         </td>
-        <td className = "InfoBox" onClick={this.toggleLogs}>
-        <div className = 'Third'>        
+        <td className = "InfoBox" >
+        <div className = 'Third' onClick={() => this.toggleLogs(0)}>        
           <Fab size="small" color = "primary" className ='Info' >
           <AddCommentIcon className = 'Icon2' />
           </Fab>
         </div>
         {this.state.showLogs ? 
           <Editor
-            logs={this.state.logs}
+            logs={this.state.currlogs}
             closePopup={this.closeLogs}
+            handler={this.handleSLogChange}
           />
           :null
         }
         </td>
-        <td className = "InfoBox2" onClick={this.toggleLogs}>
-          <div className = 'Fourth'>        
+        <td className = "InfoBox2">
+          <div className = 'Fourth'  onClick={() => this.toggleLogs(1)}>        
             <Fab size="small" color = "primary" className ='Info' >
             <ErrorIcon className = 'Icon3' />
             </Fab>
@@ -318,29 +337,38 @@ class Editor extends Machine {
   constructor(props) {
     super(props)
     let text = ''
+    let isSlog = !Array.isArray(this.props.logs)
     if (this.props.logs) {
-      this.props.logs.forEach(log => {
-        if(log) {
-          text += log.user + " " + log.type + " " + log.time +"\n"
-        }
-      })
+      if (!isSlog){
+        this.props.logs.forEach(log => {
+          if(log) {
+            text += log.user + " " + log.type + " " + log.time +"\n"
+          }
+        })
+      } else {
+        text = this.props.logs
+      }
+      
     }
     
     this.state = {
       textareaValue: text,
-      
+      isSlog: isSlog
     }
   }
   handleOnChange(event) {
     this.setState({
       textareaValue: event.target.value
     })
+    if (this.state.isSlog){
+      this.props.handler(event)
+    }
     event.preventDefault();
   }
   handleOnSubmit(event) {
     event.preventDefault();
     
-    this.props.closePopup();
+    this.props.closePopup(this.state.isSlog);
 
     
   }
