@@ -82,10 +82,22 @@ class Machine extends Component {
       id: this.props.id,
     };
 
-    console.log(this.state)
     this.togglePopup = this.togglePopup.bind(this);
 
     this.closePopup = this.closePopup.bind(this);
+  }
+
+  componentDidMount = () => {
+    this.props.clear(this.clearLogs)
+  }
+
+  clearLogs = () => {
+    this.setState({
+      currlogs:'',
+      logs:'',
+      slogs:''
+    })
+    return this.state.id
   }
 
   xclose = () =>
@@ -101,13 +113,10 @@ class Machine extends Component {
 
   closePopup(outlog)
   {
-    console.log(this.state)
     if(outlog) {
       if (this.state.logs === "") {
-        console.log("maybe")
         this.setState({logs: [,outlog]})
       }else{
-        console.log("maybe2")
         
         let previous = this.state.logs.slice()
         previous.push(outlog)
@@ -120,13 +129,10 @@ class Machine extends Component {
         showCheckOut: false
       }
     );
-    console.log(this.state)
 
   }
   
   togglePopup = (name, outlog) => {
-    console.log(this.state)
-    console.log("maybe")
 
     if (!this.state.checkedOut)
     {
@@ -137,7 +143,6 @@ class Machine extends Component {
       });
     }
     else {
-      console.log("here?")
 
       let id
       let log
@@ -154,7 +159,6 @@ class Machine extends Component {
          let previous = this.state.logs.slice()
          log = {user: user, type: "check-in", time: findTime()}
          previous.push(log)
-        console.log("here?2")
 
          this.setState({logs:previous})
       }
@@ -167,7 +171,6 @@ class Machine extends Component {
     this.setState({
       checkedOut: !this.state.checkedOut
     }) 
-    console.log(this.state)
 
    
   }
@@ -181,7 +184,6 @@ class Machine extends Component {
 
   handleSubmit = (name, type) =>
   {
-    console.log(name)
     var realCheck = !this.props.checkedOut;
     localStorage.setItem("checkedOut" + this.props.id, JSON.stringify(realCheck));
     var pastLog = this.props.logs;
@@ -282,7 +284,7 @@ class Machine extends Component {
 }
 
 
-class Checkin extends Machine {
+class Checkin extends Component {
   constructor(props) {
     super(props);
     this.state = 
@@ -309,7 +311,6 @@ class Checkin extends Machine {
 
    
     localStorage.setItem(itemName, JSON.stringify(newLog));
-    console.log(newLog)
     
     //still needs to update database 
     localStorage.setItem("green" + this.props.id, true);
@@ -333,7 +334,7 @@ class Checkin extends Machine {
   }
 }
 
-class Editor extends Machine {
+class Editor extends Component {
   constructor(props) {
     super(props)
     let text = ''
@@ -356,6 +357,7 @@ class Editor extends Machine {
       isSlog: isSlog
     }
   }
+
   handleOnChange(event) {
     this.setState({
       textareaValue: event.target.value
