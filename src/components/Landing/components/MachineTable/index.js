@@ -132,24 +132,28 @@ class MachineTable extends Component {
     render() {
         return (
             <div>
-                <table className="MachineTable">
+                <div>
+                    <table className="MachineTable">
 
-                    <tbody className="chart">
-                        <tr className="Titles">
-                            <th className="MName">Name</th>
-                            <th className="Keys">Checkout/in</th>
-                            <th className="KeyHistory">History</th>
+                        <tbody className="chart">
+                            <tr className="Titles">
+                                <th className="MName">Name</th>
+                                <th className="Keys">Checkout/in</th>
+                                <th className="KeyHistory">History</th>
 
-                            <th className="AS">Special Logs</th>
-                        </tr>
-                        {this.renderMachines()}
+                                <th className="AS">Special Logs</th>
+                            </tr>
+                            {this.renderMachines()}
 
-                    </tbody>
-                </table>
-                <button onClick={this.saveLogs}>Save Logs</button>
-                <button onClick={this.clearLogs}>Clear All Logs</button>
+                        </tbody>
+                    </table>
+                    
+                </div>
+                <div>
+                    <button className="SaveLog" onClick={this.saveLogs}>Save Logs</button>
+                    <button className="ClearLog" onClick={this.clearLogs}>Clear All Logs</button>
+                </div>
             </div>
-
         )
     }
 }
