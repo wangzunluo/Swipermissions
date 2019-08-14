@@ -40,7 +40,7 @@ class MachineTable extends Component {
                 user: row.user,
                 available: row.available,
                 logs: row.logs,
-                slogs: row.slogs
+                slogs: row.slog
             })
             counter++
         })

@@ -43,6 +43,10 @@ class Firebase {
     return this.db.ref().update(updates)
   }
 
+  removeUser = (id) => {
+    return this.db.ref('/users/' + id).remove();
+  }
+
   checkinMachine = (id, machine, logs, logid) => {
 
     let item = {
