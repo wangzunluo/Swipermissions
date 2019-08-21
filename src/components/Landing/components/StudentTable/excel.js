@@ -60,6 +60,15 @@ class ReadExcel extends Component {
     {
       this.props.firebase.writeUser(parsedAttributes, rows[i].split('\t'))
     }
+
+    this
+            .props
+            .firebase
+            .readStudentsOnce()
+            .then((value) => {
+                if (value) 
+                    this.props.updateTable(value)
+            })
   }
 
   showData = () => {

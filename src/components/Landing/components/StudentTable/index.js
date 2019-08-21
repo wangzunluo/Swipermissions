@@ -231,6 +231,23 @@ class NStudentTable extends Component {
             .props
             .firebase
             .addUser(FirstName, LastName, Email, num)
+            .then(this.addToTable(FirstName, LastName, Email, num))
+    }
+
+    addToTable = (first, last, email, id) => {
+        let newData = this.state.data.slice()
+        console.log(newData)
+        newData[id] = {
+            FirstName: first,
+            LastName: last,
+            Email: email,
+            id: id
+        }
+        this.setState({data: newData})
+
+        console.log(this.state.data)
+
+        this.togglePopup()
     }
 
     render() {
@@ -263,7 +280,7 @@ class NStudentTable extends Component {
                                     .bind(this)}/>
                             : null
 }
-                        <ExcelButton/>
+                        <ExcelButton updateTable={this.parseData}/>
                     </div>
                 )
 }
@@ -318,7 +335,7 @@ class AddPrompt extends Component {
         this.setState({newContact: event.target.value});
     }
 
-    handleSubmit(event) {
+    handleSubmit() {
         this
             .props
             .add(this.state.firstName, this.state.lastName, this.state.newContact, this.state.id)
@@ -333,8 +350,7 @@ class AddPrompt extends Component {
                     </div>
 
                     <div className='AddUser'>
-                        Add a User
-                        <form className='AddForm' onSubmit={this.handleSubmit}>
+                        Add a User <br></br>
                             New User's First Name:
                             <label className='UserBar'>
 
@@ -364,8 +380,7 @@ class AddPrompt extends Component {
                                     value={this.state.newContact}
                                     onChange={this.handleChangeContact}/>
                             </label>
-                            <input type="submit" value="Submit"/>
-                        </form>
+                            <button onClick={ this.handleSubmit} >Submit</button>
                     </div>
 
                 </div>
