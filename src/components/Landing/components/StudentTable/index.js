@@ -336,6 +336,25 @@ class AddPrompt extends Component {
     }
 
     handleSubmit() {
+        if (this.state.firstName === "") {
+            this.props.closePopup()
+            return
+        }
+
+        if (this.state.lastName === "") {
+            this.props.closePopup()
+            return
+        }
+
+        if (this.state.newContact === "") {
+            this.props.closePopup()
+            return
+        }
+
+        if (this.state.id === "") {
+            this.props.closePopup()
+            return
+        }
         this
             .props
             .add(this.state.firstName, this.state.lastName, this.state.newContact, this.state.id)
